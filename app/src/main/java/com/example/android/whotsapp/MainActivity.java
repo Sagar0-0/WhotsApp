@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setUpWithViewPager(binding.viewPager);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
+    
     private void setUpWithViewPager(ViewPager viewPager){
         MainActivity.SectionsPagerAdapter adapter=new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ChatsFragment(),"CHATS");
