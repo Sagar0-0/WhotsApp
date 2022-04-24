@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -35,6 +36,24 @@ public class MainActivity extends AppCompatActivity {
         setUpWithViewPager(binding.viewPager);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
         setSupportActionBar(binding.toolbar);
+
+        binding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                changeFabIcon(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
     private void setUpWithViewPager(ViewPager viewPager){
@@ -95,5 +114,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void changeFabIcon(final int index){
+        binding.fabAction.hide();
+        new Handler().postDelayed(() -> {
+            switch (index){
+                case 0: binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_chat_24));break;
+                case 1: binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_photo_camera_24));break;
+                case 2: binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_add_ic_call_24));break;
+            }
+            binding.fabAction.show();
+        },50);
     }
 }
