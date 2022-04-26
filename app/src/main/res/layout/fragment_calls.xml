@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".menu.CallsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calls_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="CALLS" />
+        tools:listitem="@layout/layout_call_list"/>
 
 </FrameLayout>

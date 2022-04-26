@@ -29,7 +29,7 @@ public class ChatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_chats, container, false);
-        recyclerView=view.findViewById(R.id.recyclerView);
+        recyclerView=view.findViewById(R.id.chats_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         getChatList();

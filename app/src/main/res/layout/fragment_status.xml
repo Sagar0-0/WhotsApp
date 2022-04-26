@@ -28,12 +28,12 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_alignEnd="@id/image_profile"
+                android:layout_alignBottom="@id/image_profile"
+                android:background="@android:color/white"
                 android:scaleType="center"
                 android:src="@drawable/ic_baseline_add_circle_outline_24"
-                android:layout_alignBottom="@id/image_profile"
-                android:layout_alignEnd="@id/image_profile"
-                android:background="@color/white"
-                app:tint="@color/teal_green"/>
+                app:tint="@color/teal_green" />
         </RelativeLayout>
 
         <LinearLayout
