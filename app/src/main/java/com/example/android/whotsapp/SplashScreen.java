@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.android.whotsapp.startup.WelcomeScreenActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
 
         Handler handler=new Handler();
         handler.postDelayed(() -> {
-            startActivity(new Intent(SplashScreen.this,MainActivity.class));
+            startActivity(new Intent(SplashScreen.this, WelcomeScreenActivity.class));
             finish();
         },3800);
     }
