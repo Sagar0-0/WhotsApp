@@ -1,4 +1,4 @@
-package com.example.android.whotsapp;
+package com.example.android.whotsapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivityMainBinding;
 import com.example.android.whotsapp.menu.CallsFragment;
 import com.example.android.whotsapp.menu.ChatsFragment;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         setUpWithViewPager(binding.viewPager);
         binding.tabLayout.setupWithViewPager(binding.viewPager);

@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhotsApp">
         <activity
-            android:name=".startup.WelcomeScreenActivity"
+            android:name=".view.auth.PhoneLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".view.startup.WelcomeScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.startup.SplashScreen"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -25,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".view.MainActivity" />
     </application>
 
 </manifest>
