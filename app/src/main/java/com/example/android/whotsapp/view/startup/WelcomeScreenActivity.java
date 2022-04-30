@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.android.whotsapp.view.MainActivity;
 import com.example.android.whotsapp.R;
+import com.example.android.whotsapp.view.auth.PhoneLoginActivity;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
 
         Button button=findViewById(R.id.btn_agree);
         button.setOnClickListener(v -> {
-            startActivity(new Intent(WelcomeScreenActivity.this, MainActivity.class));
+            startActivity(new Intent(WelcomeScreenActivity.this, PhoneLoginActivity.class));
             finish();
         });
     }
