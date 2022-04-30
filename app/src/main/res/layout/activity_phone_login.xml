@@ -45,14 +45,11 @@
             android:gravity="center_horizontal"
             android:textColor="@color/black"
             android:text="@string/whotsapp_will_send_you_an_sms_message_to_verify_your_phone_number"/>
-        <Spinner
-            android:id="@+id/spinner_country"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
             <TextView
@@ -68,7 +65,7 @@
                 android:maxLength="5"
                 android:maxLines="1"
                 android:layout_height="wrap_content"
-                android:hint="855"/>
+                android:text="91"/>
             <EditText
                 android:id="@+id/ed_phone"
                 android:layout_width="200dp"
@@ -76,7 +73,7 @@
                 android:maxLength="13"
                 android:maxLines="1"
                 android:inputType="phone"
-                android:hint="Phone number"/>
+                android:hint="@string/phone_number"/>
         </LinearLayout>
 
         <TextView
@@ -84,7 +81,16 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_marginTop="15dp"
-            android:text="Carrie SMS charges may apply*"/>
+            android:text="Carrier SMS charges may apply*"/>
+
+        <EditText
+            android:id="@+id/ed_code"
+            android:layout_width="200dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:maxLength="6"
+            android:inputType="number"
+            android:hint="@string/enter_code"/>
     </LinearLayout>
 
     <Button

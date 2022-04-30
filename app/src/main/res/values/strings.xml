@@ -10,4 +10,6 @@
     <string name="welcome_to_whotsapp">Welcome to WhotsApp</string>
     <string name="enter_your_phone_number">Enter your phone number</string>
     <string name="whotsapp_will_send_you_an_sms_message_to_verify_your_phone_number">WhotsApp will send you an SMS message to verify your phone number</string>
+    <string name="phone_number">Phone number</string>
+    <string name="enter_code">Enter code</string>
 </resources>
