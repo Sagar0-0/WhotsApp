@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhotsApp">
         <activity
+            android:name=".view.auth.SetUserInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.auth.PhoneLoginActivity"
             android:exported="false" />
         <activity

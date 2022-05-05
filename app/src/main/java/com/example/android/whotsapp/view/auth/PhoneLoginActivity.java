@@ -122,7 +122,7 @@ public class PhoneLoginActivity extends AppCompatActivity{
                         Log.d(TAG, "signInWithCredential:success");
                         Toast.makeText(PhoneLoginActivity.this, "Sign in Successful :)", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = task.getResult().getUser();
-                        startActivity(new Intent(PhoneLoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
                         finish();
                     } else {
                         progressDialog.dismiss();

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.auth.SetUserInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_info"
+            android:textSize="17sp"
+            android:textColor="@color/theme_color"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please provide your name and choose an avatar"
+            android:textSize="14sp"
+            android:textColor="@color/light_grey"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"/>
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/image_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            app:civ_border="true"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/theme_color"
+            android:src="@drawable/profile_placeholder"/>
+        <EditText
+            android:id="@+id/ed_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginEnd="65dp"
+            android:gravity="center_horizontal"
+            android:hint="Type your name here.."/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@color/theme_color"
+        android:text="Next"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
