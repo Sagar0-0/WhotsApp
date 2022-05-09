@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivityPhoneLoginBinding;
+import com.example.android.whotsapp.model.users.User;
 import com.example.android.whotsapp.view.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +31,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,11 +40,14 @@ public class PhoneLoginActivity extends AppCompatActivity{
 
     private ActivityPhoneLoginBinding binding;
     private static String TAG="PhoneLoginActivity";
-    private FirebaseAuth mAuth;
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private ProgressDialog progressDialog;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
+    private FirebaseFirestore fireStore;
 
 
     @Override
@@ -50,6 +57,7 @@ public class PhoneLoginActivity extends AppCompatActivity{
 
         //firebase
         mAuth=FirebaseAuth.getInstance();
+        fireStore=FirebaseFirestore.getInstance();
 
         //button call
         progressDialog=new ProgressDialog(this);
@@ -122,8 +130,31 @@ public class PhoneLoginActivity extends AppCompatActivity{
                         Log.d(TAG, "signInWithCredential:success");
                         Toast.makeText(PhoneLoginActivity.this, "Sign in Successful :)", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = task.getResult().getUser();
-                        startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
-                        finish();
+                        if(user!=null){
+                            String userId=user.getUid();
+                            User myUser=new User(
+                                    user.getUid(),
+                                    user.getDisplayName(),
+                                    user.getPhoneNumber(),
+                                    "",
+                                    "",
+                                    user.getEmail(),
+                                    "",
+                                    "",
+                                    "",
+                                    "");
+                            fireStore.collection("Users").document("UserInfo")
+                                    .collection(userId).add(myUser)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
+                                            finish();
+                                        }
+                                    });
+                        }else{
+                            Toast.makeText(this, "Somthing went wrong :(", Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         progressDialog.dismiss();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
