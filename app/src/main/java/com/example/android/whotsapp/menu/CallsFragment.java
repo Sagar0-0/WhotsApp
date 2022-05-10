@@ -32,7 +32,7 @@ public class CallsFragment extends Fragment {
         recyclerView=view.findViewById(R.id.calls_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getCallsList();
+//        getCallsList();
         return view;
     }
 
