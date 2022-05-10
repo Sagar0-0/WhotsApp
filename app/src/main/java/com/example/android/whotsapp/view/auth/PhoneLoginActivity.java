@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 public class PhoneLoginActivity extends AppCompatActivity{
 
     private ActivityPhoneLoginBinding binding;
-    private static String TAG="PhoneLoginActivity";
+    private static final String TAG="PhoneLoginActivity";
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -59,11 +59,6 @@ public class PhoneLoginActivity extends AppCompatActivity{
         mAuth=FirebaseAuth.getInstance();
         fireStore=FirebaseFirestore.getInstance();
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-        if(firebaseUser!=null){
-            startActivity(new Intent(this,SetUserInfoActivity.class));
-            finish();
-        }
-
         //button call
         progressDialog=new ProgressDialog(this);
         binding.btnNext.setOnClickListener(v -> {
@@ -123,10 +118,12 @@ public class PhoneLoginActivity extends AppCompatActivity{
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
+
     private void verifyPhoneWithCode(String verificationId,String code){
         PhoneAuthCredential credential=PhoneAuthProvider.getCredential(verificationId,code);
         signInWithPhoneAuthCredential(credential);
     }
+
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
@@ -137,30 +134,6 @@ public class PhoneLoginActivity extends AppCompatActivity{
                         FirebaseUser user = task.getResult().getUser();
                         startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
                         finish();
-//                        if(user!=null){
-//                            String userId=user.getUid();
-//                            User myUser=new User(
-//                                    user.getUid(),
-//                                    user.getDisplayName(),
-//                                    user.getPhoneNumber(),
-//                                    "",
-//                                    "",
-//                                    user.getEmail(),
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "");
-//                            fireStore.collection("Users").document("UserInfo")
-//                                    .collection(userId).add(myUser)
-//                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                        @Override
-//                                        public void onSuccess(DocumentReference documentReference) {
-//
-//                                        }
-//                                    });
-//                        }else{
-//                            Toast.makeText(this, "Somthing went wrong :(", Toast.LENGTH_LONG).show();
-//                        }
                     } else {
                         progressDialog.dismiss();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
