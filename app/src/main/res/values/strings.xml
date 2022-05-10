@@ -13,4 +13,16 @@
     <string name="phone_number">Phone number</string>
     <string name="enter_code">Enter code</string>
     <string name="profile_info">Profile info</string>
+    <string name="more">More</string>
+    <string name="search">Search</string>
+    <string name="new_group">New group</string>
+    <string name="new_broadcast">New broadcast</string>
+    <string name="linked_devices">Linked devices</string>
+    <string name="starred_messages">Starred messages</string>
+    <string name="payments">Payments</string>
+    <string name="settings">Settings</string>
+    <string name="none_of_your_contacts_are_using_whotsapp_nuse_the_button_below_to_invite_them">None of your contacts are using WhotsApp.\nUse the button below to invite them.</string>
+    <string name="invite_a_friend">Invite a friend</string>
+    <string name="chat_with_your_friends_who_are_using_whotsapp_on_niphone_android_windows_and_linux_os">Chat with your friends who are using WhotsApp on\niPhone, Android, Windows and Linux OS</string>
+    <string name="invite_your_friends">Invite your friends</string>
 </resources>

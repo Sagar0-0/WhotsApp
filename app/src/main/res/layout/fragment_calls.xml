@@ -9,8 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calls_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/layout_call_list"/>
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:id="@+id/ll_invite"
@@ -22,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invite your friends"
+            android:text="@string/invite_your_friends"
             android:textSize="25sp"
             android:textColor="@color/black"/>
         <TextView
@@ -31,7 +30,7 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:text="None of your contacts are using WhotsApp.\nUse the button below to invite them."/>
+            android:text="@string/none_of_your_contacts_are_using_whotsapp_nuse_the_button_below_to_invite_them"/>
         <Button
             android:id="@+id/btn_invite"
             android:layout_width="match_parent"
@@ -40,14 +39,14 @@
             android:layout_marginEnd="30dp"
             android:background="#076C2D"
             android:textColor="@color/white"
-            android:text="Invite a friend"/>
+            android:text="@string/invite_a_friend"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:text="Chat with your friends who are using WhotsApp on\niPhone, Android, Windows and Linux OS"/>
+            android:text="@string/chat_with_your_friends_who_are_using_whotsapp_on_niphone_android_windows_and_linux_os"/>
 
     </LinearLayout>
 

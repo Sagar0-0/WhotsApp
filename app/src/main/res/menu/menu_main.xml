@@ -5,12 +5,32 @@
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_baseline_search_24"
         android:iconTint="@color/white"
-        android:title="Search"
+        android:title="@string/search"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/menu_more"
+    <item android:id="@+id/action_more"
         android:icon="@drawable/ic_baseline_more_vert_24"
         android:iconTint="@color/white"
-        android:title="Search"
-        app:showAsAction="always"/>
+        android:title="@string/more"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_new_group"
+                android:title="@string/new_group"/>
+            <item
+                android:id="@+id/action_new_broadcast"
+                android:title="@string/new_broadcast"/>
+            <item
+                android:id="@+id/action_wa_web"
+                android:title="@string/linked_devices"/>
+            <item
+                android:id="@+id/action_star_msgs"
+                android:title="@string/starred_messages"/>
+            <item
+                android:id="@+id/action_payments"
+                android:title="@string/payments"/>
+            <item
+                android:id="@+id/action_settings"
+                android:title="@string/settings"/>
+        </menu>
+    </item>
 </menu>
