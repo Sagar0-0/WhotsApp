@@ -58,6 +58,11 @@ public class PhoneLoginActivity extends AppCompatActivity{
         //firebase
         mAuth=FirebaseAuth.getInstance();
         fireStore=FirebaseFirestore.getInstance();
+        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser!=null){
+            startActivity(new Intent(this,SetUserInfoActivity.class));
+            finish();
+        }
 
         //button call
         progressDialog=new ProgressDialog(this);
@@ -130,31 +135,32 @@ public class PhoneLoginActivity extends AppCompatActivity{
                         Log.d(TAG, "signInWithCredential:success");
                         Toast.makeText(PhoneLoginActivity.this, "Sign in Successful :)", Toast.LENGTH_SHORT).show();
                         FirebaseUser user = task.getResult().getUser();
-                        if(user!=null){
-                            String userId=user.getUid();
-                            User myUser=new User(
-                                    user.getUid(),
-                                    user.getDisplayName(),
-                                    user.getPhoneNumber(),
-                                    "",
-                                    "",
-                                    user.getEmail(),
-                                    "",
-                                    "",
-                                    "",
-                                    "");
-                            fireStore.collection("Users").document("UserInfo")
-                                    .collection(userId).add(myUser)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
-                                            finish();
-                                        }
-                                    });
-                        }else{
-                            Toast.makeText(this, "Somthing went wrong :(", Toast.LENGTH_LONG).show();
-                        }
+                        startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
+                        finish();
+//                        if(user!=null){
+//                            String userId=user.getUid();
+//                            User myUser=new User(
+//                                    user.getUid(),
+//                                    user.getDisplayName(),
+//                                    user.getPhoneNumber(),
+//                                    "",
+//                                    "",
+//                                    user.getEmail(),
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "");
+//                            fireStore.collection("Users").document("UserInfo")
+//                                    .collection(userId).add(myUser)
+//                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                                        @Override
+//                                        public void onSuccess(DocumentReference documentReference) {
+//
+//                                        }
+//                                    });
+//                        }else{
+//                            Toast.makeText(this, "Somthing went wrong :(", Toast.LENGTH_LONG).show();
+//                        }
                     } else {
                         progressDialog.dismiss();
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
