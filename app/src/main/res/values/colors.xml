@@ -3,7 +3,7 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_green">#067A6D</color>
+    <color name="teal_green">#008069</color>
     <color name="teal_200">#FF018786</color>
     <color name="teal_500">#FF018786</color>
     <color name="teal_700">#FF018786</color>
@@ -17,4 +17,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#252525</color>
     <color name="light_grey">#595959</color>
+    <color name="icon_color">#A8AFB6</color>
 </resources>

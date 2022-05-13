@@ -25,4 +25,14 @@
     <string name="invite_a_friend">Invite a friend</string>
     <string name="chat_with_your_friends_who_are_using_whotsapp_on_niphone_android_windows_and_linux_os">Chat with your friends who are using WhotsApp on\niPhone, Android, Windows and Linux OS</string>
     <string name="invite_your_friends">Invite your friends</string>
+    <string name="theme_wallpapers_chat_history">Theme, wallpapers, chat history</string>
+    <string name="chats">Chats</string>
+    <string name="account">Account</string>
+    <string name="privacy_security_change_number">Privacy,security, change number</string>
+    <string name="notifications">Notifications</string>
+    <string name="message_group_amp_call_tones"><![CDATA[Message, group & call tones]]></string>
+    <string name="storage_and_data">Storage and data</string>
+    <string name="network_usage_auto_download">Network usage, auto-download</string>
+    <string name="help">Help</string>
+    <string name="help_center_contact_us_privacy_policy">Help center, contact us, privacy policy</string>
 </resources>

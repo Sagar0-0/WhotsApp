@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import com.example.android.whotsapp.databinding.ActivityMainBinding;
 import com.example.android.whotsapp.menu.CallsFragment;
 import com.example.android.whotsapp.menu.ChatsFragment;
 import com.example.android.whotsapp.menu.StatusFragment;
+import com.example.android.whotsapp.view.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Action payments", Toast.LENGTH_LONG).show();
                 break;
             case R.id.action_settings:
-                Toast.makeText(this, "Action settings", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
