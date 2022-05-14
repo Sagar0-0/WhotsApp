@@ -26,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
     private ActivitySettingsBinding binding;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
+    private String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(firebaseUser!=null)getinfo();
 
-        binding.llProfile.setOnClickListener(v -> startActivity(new Intent(SettingsActivity.this, ProfileActivity.class)));
+        binding.llProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SettingsActivity.this, ProfileActivity.class);
+                i.putExtra("userName",userName);
+                startActivity(i);
+            }
+        });
     }
 
     private void getinfo() {
@@ -47,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        String userName= Objects.requireNonNull(documentSnapshot.get("userName")).toString();
+                        userName= Objects.requireNonNull(documentSnapshot.get("userName")).toString();
                         binding.tvUsername.setText(userName);
                     }
                 }).addOnFailureListener(new OnFailureListener() {

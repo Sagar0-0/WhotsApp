@@ -55,15 +55,15 @@
         android:padding="15dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_baseline_person_24"
             app:tint="@color/icon_color"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingEnd="15dp"
-            android:paddingStart="15dp"
+            android:paddingStart="18dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_edit_24"
-                    app:tint="@color/theme_color"
+                    app:tint="@color/teal_green"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
             <TextView
@@ -111,15 +111,15 @@
         android:padding="15dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_outline_info_24"
             app:tint="@color/icon_color"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingEnd="15dp"
-            android:paddingStart="15dp"
+            android:paddingStart="18dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_edit_24"
-                    app:tint="@color/theme_color"
+                    app:tint="@color/teal_green"
                     android:background="@android:color/transparent"/>
             </LinearLayout>
             <TextView
@@ -160,15 +160,15 @@
         android:padding="15dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_baseline_call_24"
             app:tint="@color/icon_color"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingEnd="15dp"
-            android:paddingStart="15dp"
+            android:paddingStart="18dp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textColor="@color/black"
-                android:text="+91 9896076738"/>
+                android:text="+91 xxxxxxxxxx"/>
         </LinearLayout>
     </LinearLayout>
 
