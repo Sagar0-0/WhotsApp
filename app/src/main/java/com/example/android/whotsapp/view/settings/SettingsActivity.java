@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivitySettingsBinding;
+import com.example.android.whotsapp.view.profile.ProfileActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,10 +31,15 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=DataBindingUtil.setContentView(this,R.layout.activity_settings);
 
+        setSupportActionBar(binding.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         firestore=FirebaseFirestore.getInstance();
 
-        getinfo();
+        if(firebaseUser!=null)getinfo();
+
+        binding.llProfile.setOnClickListener(v -> startActivity(new Intent(SettingsActivity.this, ProfileActivity.class)));
     }
 
     private void getinfo() {

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhotsApp">
         <activity
+            android:name=".view.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.settings.SettingsActivity"
             android:exported="false" />
         <activity

@@ -8,13 +8,20 @@
     tools:context=".view.settings.SettingsActivity"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Settings"
-        app:titleTextColor="@color/white"
-        android:backgroundTint="@color/teal_green"
-        android:background="@color/teal_green"/>
+        android:background="@color/teal_green">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Settings"
+            app:titleTextColor="@color/white"
+            android:backgroundTint="@color/teal_green"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,6 +32,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -289,5 +297,6 @@
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
 </layout>

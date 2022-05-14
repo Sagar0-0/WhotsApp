@@ -35,4 +35,8 @@
     <string name="network_usage_auto_download">Network usage, auto-download</string>
     <string name="help">Help</string>
     <string name="help_center_contact_us_privacy_policy">Help center, contact us, privacy policy</string>
+    <string name="name">Name</string>
+    <string name="this_is_not_your_username_or_pin_this_name_will_be_visible_to_your_whotsapp_contacts">This is not your username or pin. This name will be visible to your WhotsApp contacts</string>
+    <string name="about">About</string>
+    <string name="phone">Phone</string>
 </resources>
