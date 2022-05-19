@@ -45,7 +45,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SettingsActivity.this, ProfileActivity.class);
-                i.putExtra("userName",userName);
                 startActivity(i);
             }
         });

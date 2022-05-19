@@ -39,4 +39,7 @@
     <string name="this_is_not_your_username_or_pin_this_name_will_be_visible_to_your_whotsapp_contacts">This is not your username or pin. This name will be visible to your WhotsApp contacts</string>
     <string name="about">About</string>
     <string name="phone">Phone</string>
+    <string name="profile_photo">Profile photo</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 </resources>
