@@ -19,35 +19,32 @@
         android:padding="5dp"
         android:orientation="horizontal">
         <LinearLayout
+            android:id="@+id/ll_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_margin="10dp"
             android:orientation="vertical">
-            <ImageView
-                android:id="@+id/camera_pick"
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_baseline_photo_camera_24"
-                android:background="@color/teal_green"
-                android:scaleType="center"/>
+                android:src="@drawable/camera"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/camera"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_margin="10dp"
             android:orientation="vertical">
-            <ImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_baseline_photo_24"
-                android:background="@color/teal_green"
-                android:scaleType="center"/>
+                android:src="@drawable/gallery"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
