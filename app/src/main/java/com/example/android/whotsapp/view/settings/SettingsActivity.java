@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivitySettingsBinding;
 import com.example.android.whotsapp.view.profile.ProfileActivity;
@@ -56,6 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         userName= Objects.requireNonNull(documentSnapshot.get("userName")).toString();
+                        String imageProfile= Objects.requireNonNull(documentSnapshot.get("imageProfile")).toString();
+
+                        Glide.with(SettingsActivity.this).load(imageProfile).into(binding.imageProfile);
                         binding.tvUsername.setText(userName);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
