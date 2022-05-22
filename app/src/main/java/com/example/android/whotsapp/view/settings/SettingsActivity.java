@@ -27,7 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
     private ActivitySettingsBinding binding;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
-    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +55,11 @@ public class SettingsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        userName= Objects.requireNonNull(documentSnapshot.get("userName")).toString();
-                        String imageProfile= Objects.requireNonNull(documentSnapshot.get("imageProfile")).toString();
+                        String userName= documentSnapshot.getString("userName");
+                        String imageProfile= documentSnapshot.getString("imageProfile");
 
-                        Glide.with(SettingsActivity.this).load(imageProfile).into(binding.imageProfile);
                         binding.tvUsername.setText(userName);
+                        Glide.with(SettingsActivity.this).load(imageProfile).into(binding.imageProfile);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
