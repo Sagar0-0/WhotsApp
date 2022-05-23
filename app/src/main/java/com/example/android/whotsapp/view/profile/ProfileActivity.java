@@ -5,10 +5,12 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ActivityProfileBinding binding;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
-    private BottomSheetDialog bottomSheetDialog;
+    private BottomSheetDialog bsPickPhoto,bsEditName;
     private Uri imageUri;
     private ProgressDialog progressDialog;
 
@@ -61,27 +63,64 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initActionClick() {
-        binding.fabCamera.setOnClickListener(v -> showBottomSheet());
+        binding.fabCamera.setOnClickListener(v -> showBottomSheetPickPhoto());
+        binding.llEditName.setOnClickListener(v -> showBottomSheetEditName());
     }
 
-    private void showBottomSheet() {
+    private void showBottomSheetEditName() {
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_name, null);
+
+        view.findViewById(R.id.btn_cancel).setOnClickListener(v -> {
+            bsEditName.dismiss();
+        });
+        final EditText editText=view.findViewById(R.id.ed_username);
+        view.findViewById(R.id.btn_save).setOnClickListener(v -> {
+            if(TextUtils.isEmpty(editText.getText().toString())){
+                Toast.makeText(this, "Name can't be empty", Toast.LENGTH_SHORT).show();
+            }else{
+                upadteName(editText.getText().toString());
+                bsEditName.dismiss();
+            }
+        });
+
+        bsEditName = new BottomSheetDialog(this);
+        bsEditName.setContentView(view);
+
+        bsEditName.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        bsEditName.setOnDismissListener(dialog -> bsEditName = null);
+        bsEditName.show();
+    }
+
+    private void upadteName(String newName) {
+        firestore.collection("Users").document(firebaseUser.getUid()).update("userName",newName)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ProfileActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
+                        getinfo();
+                    }
+                });
+    }
+
+
+    private void showBottomSheetPickPhoto() {
         View view = getLayoutInflater().inflate(R.layout.profile_pick_sheet, null);
 
         view.findViewById(R.id.ll_gallery).setOnClickListener(v -> {
             openGallery();
-            bottomSheetDialog.dismiss();
+            bsPickPhoto.dismiss();
         });
         view.findViewById(R.id.ll_camera).setOnClickListener(v -> {
             Toast.makeText(this, "Can't you wait for it?", Toast.LENGTH_SHORT).show();
-            bottomSheetDialog.dismiss();
+            bsPickPhoto.dismiss();
         });
 
-        bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(view);
+        bsPickPhoto = new BottomSheetDialog(this);
+        bsPickPhoto.setContentView(view);
 
-        bottomSheetDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        bottomSheetDialog.setOnDismissListener(dialog -> bottomSheetDialog = null);
-        bottomSheetDialog.show();
+        bsPickPhoto.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        bsPickPhoto.setOnDismissListener(dialog -> bsPickPhoto = null);
+        bsPickPhoto.show();
     }
 
     private void openGallery() {
@@ -100,12 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
                 && data.getData() != null) {
             imageUri = data.getData();
             uploadToFirebase();
-//            try{
-//                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-//                binding.imageProfile.setImageBitmap(bitmap);
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
         }
     }
 

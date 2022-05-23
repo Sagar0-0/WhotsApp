@@ -60,6 +60,7 @@
             android:src="@drawable/ic_baseline_person_24"
             app:tint="@color/icon_color"/>
         <LinearLayout
+            android:id="@+id/ll_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingEnd="15dp"

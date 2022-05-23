@@ -42,4 +42,8 @@
     <string name="profile_photo">Profile photo</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="type_here">Type here...</string>
+    <string name="enter_your_name">Enter your name</string>
 </resources>
