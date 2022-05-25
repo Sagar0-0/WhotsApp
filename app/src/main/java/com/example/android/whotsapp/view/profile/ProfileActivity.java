@@ -3,6 +3,8 @@ package com.example.android.whotsapp.view.profile;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,11 +18,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
+import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.databinding.ActivityProfileBinding;
+import com.example.android.whotsapp.view.display.ViewImageActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -65,6 +70,17 @@ public class ProfileActivity extends AppCompatActivity {
     private void initActionClick() {
         binding.fabCamera.setOnClickListener(v -> showBottomSheetPickPhoto());
         binding.llEditName.setOnClickListener(v -> showBottomSheetEditName());
+        binding.imageProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.imageProfile.invalidate();
+                Drawable dr=binding.imageProfile.getDrawable();
+                Common.IMAGE_BITMAP=((BitmapDrawable)dr.getCurrent()).getBitmap();
+                ActivityOptionsCompat activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(ProfileActivity.this,binding.imageProfile,"image");
+                Intent intent=new Intent(ProfileActivity.this, ViewImageActivity.class);
+                startActivity(intent,activityOptionsCompat.toBundle());
+            }
+        });
     }
 
     private void showBottomSheetEditName() {
