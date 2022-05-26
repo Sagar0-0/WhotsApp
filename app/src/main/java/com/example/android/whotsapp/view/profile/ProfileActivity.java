@@ -1,7 +1,9 @@
 package com.example.android.whotsapp.view.profile;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -26,6 +28,7 @@ import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.databinding.ActivityProfileBinding;
 import com.example.android.whotsapp.view.display.ViewImageActivity;
+import com.example.android.whotsapp.view.startup.SplashScreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -70,17 +73,31 @@ public class ProfileActivity extends AppCompatActivity {
     private void initActionClick() {
         binding.fabCamera.setOnClickListener(v -> showBottomSheetPickPhoto());
         binding.llEditName.setOnClickListener(v -> showBottomSheetEditName());
-        binding.imageProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.imageProfile.invalidate();
-                Drawable dr=binding.imageProfile.getDrawable();
-                Common.IMAGE_BITMAP=((BitmapDrawable)dr.getCurrent()).getBitmap();
-                ActivityOptionsCompat activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(ProfileActivity.this,binding.imageProfile,"image");
-                Intent intent=new Intent(ProfileActivity.this, ViewImageActivity.class);
-                startActivity(intent,activityOptionsCompat.toBundle());
-            }
+        binding.imageProfile.setOnClickListener(v -> {
+            binding.imageProfile.invalidate();
+            Drawable dr=binding.imageProfile.getDrawable();
+            Common.IMAGE_BITMAP=((BitmapDrawable)dr.getCurrent()).getBitmap();
+            ActivityOptionsCompat activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(ProfileActivity.this,binding.imageProfile,"image");
+            Intent intent=new Intent(ProfileActivity.this, ViewImageActivity.class);
+            startActivity(intent,activityOptionsCompat.toBundle());
         });
+        binding.btnLogOut.setOnClickListener(v -> {
+            showDialogSignOut();
+        });
+    }
+
+    private void showDialogSignOut() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage("DO you want to Sign out?");
+        builder.setPositiveButton("Sign Out", (dialog, which) -> {
+            dialog.cancel();
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(ProfileActivity.this, SplashScreen.class));
+            finish();
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
     }
 
     private void showBottomSheetEditName() {
@@ -117,7 +134,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
     private void showBottomSheetPickPhoto() {
         View view = getLayoutInflater().inflate(R.layout.profile_pick_sheet, null);

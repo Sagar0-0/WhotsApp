@@ -32,11 +32,11 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/image_profile"
-            android:transitionName="image"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/profile_placeholder" />
+            android:src="@drawable/profile_placeholder"
+            android:transitionName="image" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_camera"
@@ -53,140 +53,154 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_person_24"
-            app:tint="@color/icon_color"/>
+        android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/ll_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="15dp"
-            android:paddingStart="18dp"
-            android:orientation="vertical">
+            android:padding="15dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:tint="@color/icon_color"/>
+            <LinearLayout
+                android:id="@+id/ll_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="15dp"
+                android:paddingStart="18dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#605B5B"
+                        android:text="@string/name"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        app:tint="@color/teal_green"
+                        android:background="@android:color/transparent"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Username"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="13sp"
+                    android:textColor="#605B5B"
+                    android:text="@string/this_is_not_your_username_or_pin_this_name_will_be_visible_to_your_whotsapp_contacts"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E4E4E4"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_outline_info_24"
+                app:tint="@color/icon_color"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                android:paddingEnd="15dp"
+                android:paddingStart="18dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="#605B5B"
-                    android:text="@string/name"/>
-                <ImageButton
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#605B5B"
+                        android:text="@string/about"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        app:tint="@color/teal_green"
+                        android:background="@android:color/transparent"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    app:tint="@color/teal_green"
-                    android:background="@android:color/transparent"/>
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="Hey there! I am using Whotsapp."/>
             </LinearLayout>
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:text="Username"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="13sp"
-                android:textColor="#605B5B"
-                android:text="@string/this_is_not_your_username_or_pin_this_name_will_be_visible_to_your_whotsapp_contacts"/>
         </LinearLayout>
-    </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E4E4E4"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E4E4E4"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_outline_info_24"
-            app:tint="@color/icon_color"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="15dp"
-            android:paddingStart="18dp"
-            android:orientation="vertical">
+            android:padding="15dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_call_24"
+                app:tint="@color/icon_color"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:paddingEnd="15dp"
+                android:paddingStart="18dp"
+                android:orientation="vertical">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:textColor="#605B5B"
-                    android:text="@string/about"/>
-                <ImageButton
+                    android:text="@string/phone"/>
+                <TextView
+                    android:id="@+id/tv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    app:tint="@color/teal_green"
-                    android:background="@android:color/transparent"/>
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:text="+91 xxxxxxxxxx"/>
             </LinearLayout>
-            <TextView
-                android:id="@+id/tv_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:text="Hey there! I am using Whotsapp."/>
         </LinearLayout>
     </LinearLayout>
 
-    <View
+    <Button
+        android:id="@+id/btn_log_out"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E4E4E4"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_call_24"
-            app:tint="@color/icon_color"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingEnd="15dp"
-            android:paddingStart="18dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="#605B5B"
-                android:text="@string/phone"/>
-            <TextView
-                android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:text="+91 xxxxxxxxxx"/>
-        </LinearLayout>
-    </LinearLayout>
+        android:text="SIGN OUT"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
 
