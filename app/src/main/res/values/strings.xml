@@ -46,4 +46,5 @@
     <string name="save">Save</string>
     <string name="type_here">Type here...</string>
     <string name="enter_your_name">Enter your name</string>
+    <string name="select_contact">Select Contact</string>
 </resources>

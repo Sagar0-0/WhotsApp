@@ -14,13 +14,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.whotsapp.R;
+import com.example.android.whotsapp.adapter.ContactsAdapter;
 import com.example.android.whotsapp.databinding.ActivityMainBinding;
 import com.example.android.whotsapp.menu.CallsFragment;
 import com.example.android.whotsapp.menu.ChatsFragment;
 import com.example.android.whotsapp.menu.StatusFragment;
+import com.example.android.whotsapp.view.contact.ContactsActivity;
 import com.example.android.whotsapp.view.settings.SettingsActivity;
 
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         binding.tabLayout.setupWithViewPager(binding.viewPager);
         setSupportActionBar(binding.toolbar);
 
+        binding.fabAction.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ContactsActivity.class)));
         binding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -138,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
         binding.fabAction.hide();
         new Handler().postDelayed(() -> {
             switch (index){
-                case 0: binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_chat_24));break;
+                case 0:
+                    binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_chat_24));
+                    break;
                 case 1: binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_photo_camera_24));break;
                 case 2: binding.fabAction.setImageDrawable(getDrawable(R.drawable.ic_baseline_add_ic_call_24));break;
             }
