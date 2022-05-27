@@ -32,6 +32,7 @@ public class ContactsActivity extends AppCompatActivity {
     private ContactsAdapter adapter;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
