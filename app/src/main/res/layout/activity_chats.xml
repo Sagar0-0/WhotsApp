@@ -16,65 +16,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/teal_green">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal_green"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_back_24"
                 android:background="@android:color/transparent"
-                app:tint="@color/white"/>
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/white" />
+
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/image_profile"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:civ_border_width="0dp"
-                android:src="@drawable/profile_placeholder"/>
+                android:src="@drawable/profile_placeholder"
+                app:civ_border_width="0dp" />
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:paddingStart="15dp"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="15dp">
+
                 <TextView
                     android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Username"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:text="Username"/>
+                    android:textSize="13sp" />
+
                 <TextView
                     android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="last seen today at 9:00am"
                     android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:text="last seen today at 9:00am"/>
+                    android:textSize="11sp" />
             </LinearLayout>
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                app:tint="@color/white"/>-->
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                app:tint="@color/white"/>-->
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                app:tint="@color/white"/>-->
+            <!--            <ImageButton-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                app:tint="@color/white"/>-->
+            <!--            <ImageButton-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                app:tint="@color/white"/>-->
+            <!--            <ImageButton-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                app:tint="@color/white"/>-->
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable-v24/bg_text_chat_right.xml" value="0.1105" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1375" />
+        <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable/bg_text_chat_left.xml" value="0.1105" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.121" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1245" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.1105" />
@@ -11,6 +13,7 @@
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1375" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/drawable/ic_outline_emoji_emotions_24.xml" value="0.1105" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout-v23/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout-v23/chat_item_right.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/activity_chats.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/activity_contacts.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -22,6 +25,7 @@
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/activity_view_image.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/activity_welcome_screen.xml" value="0.2" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/bottom_sheet_edit_name.xml" value="0.1641025641025641" />
+        <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/chat_item_left.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/fragment_calls.xml" value="0.2" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/fragment_chats.xml" value="0.2" />
         <entry key="..\:/Users/sagar/AndroidStudioProjects/WhotsApp/app/src/main/res/layout/fragment_status.xml" value="0.2" />
