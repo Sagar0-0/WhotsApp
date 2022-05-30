@@ -55,7 +55,7 @@ public class ContactsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(QueryDocumentSnapshot snapshot:queryDocumentSnapshots){
-                    String userID=snapshot.getString("userId    ");
+                    String userID=snapshot.getString("userId");
                     String userName=snapshot.getString("userName");
                     String imageUrl=snapshot.getString("imageProfile");
                     String desc=snapshot.getString("bio");

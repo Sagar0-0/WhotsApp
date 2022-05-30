@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhotsApp">
         <activity
+            android:name=".view.chats.ChatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.contact.ContactsActivity"
             android:exported="false" />
         <activity

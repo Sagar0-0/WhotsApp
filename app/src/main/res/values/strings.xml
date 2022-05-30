@@ -47,4 +47,5 @@
     <string name="type_here">Type here...</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="select_contact">Select Contact</string>
+    <string name="type_message_here">Message</string>
 </resources>

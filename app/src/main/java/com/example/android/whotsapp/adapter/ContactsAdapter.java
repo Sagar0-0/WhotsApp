@@ -1,6 +1,7 @@
 package com.example.android.whotsapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.users.User;
+import com.example.android.whotsapp.view.chats.ChatsActivity;
+import com.example.android.whotsapp.view.contact.ContactsActivity;
 
 import org.w3c.dom.Text;
 
@@ -41,6 +44,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         holder.username.setText(user.getUserName());
         holder.desc.setText(user.getBio());
         Glide.with(context).load(user.getImageProfile()).into(holder.imageProfile);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, ChatsActivity.class)
+                        .putExtra("userId",user.getUserId())
+                        .putExtra("userName",user.getUserName())
+                        .putExtra("userProfile",user.getImageProfile()));
+            }
+        });
     }
 
     @Override
