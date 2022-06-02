@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/teal_green</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
     <style name="SplashTheme" parent="Theme.WhotsApp">
         <item name="android:statusBarColor">@color/splash_status_color</item>

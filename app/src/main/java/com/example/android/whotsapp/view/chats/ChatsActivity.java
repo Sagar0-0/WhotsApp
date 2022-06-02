@@ -62,7 +62,11 @@ public class ChatsActivity extends AppCompatActivity {
 
         if (receiverId != null) {
             binding.tvUsername.setText(userName);
-            Glide.with(this).load(userProfile).into(binding.imageProfile);
+            if(userProfile==null || userProfile.equals("")){
+                binding.imageProfile.setImageResource(R.drawable.profile_placeholder);
+            }else{
+                Glide.with(this).load(userProfile).into(binding.imageProfile);
+            }
         }
 
         binding.edMessage.addTextChangedListener(new TextWatcher() {
