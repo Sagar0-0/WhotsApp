@@ -1,6 +1,7 @@
 package com.example.android.whotsapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.ChatList;
+import com.example.android.whotsapp.view.chats.ChatsActivity;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
@@ -41,6 +43,16 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         holder.tvDate.setText(chatList.getDate());
 
         Glide.with(context).load(chatList.getUrlProfile()).into(holder.profile);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, ChatsActivity.class)
+                        .putExtra("userId",chatList.getUserId())
+                        .putExtra("userName",chatList.getUserName())
+                        .putExtra("userProfile",chatList.getUrlProfile()));
+            }
+        });
     }
 
     @Override

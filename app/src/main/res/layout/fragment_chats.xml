@@ -14,6 +14,7 @@
 
     <LinearLayout
         android:id="@+id/ll_invite"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -50,6 +51,12 @@
             android:text="@string/chat_with_your_friends_who_are_using_whotsapp_on_niphone_android_windows_and_linux_os"/>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </FrameLayout>
 

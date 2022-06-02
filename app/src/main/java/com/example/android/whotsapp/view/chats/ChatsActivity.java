@@ -65,13 +65,6 @@ public class ChatsActivity extends AppCompatActivity {
             Glide.with(this).load(userProfile).into(binding.imageProfile);
         }
 
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         binding.edMessage.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -146,6 +139,12 @@ public class ChatsActivity extends AppCompatActivity {
                     sendTextMessage(binding.edMessage.getText().toString());
                     binding.edMessage.setText("");
                 }
+            }
+        });
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
