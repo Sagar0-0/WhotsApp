@@ -61,7 +61,12 @@ public class SettingsActivity extends AppCompatActivity {
                         String imageProfile= documentSnapshot.getString("imageProfile");
 
                         binding.tvUsername.setText(userName);
-                        Glide.with(SettingsActivity.this).load(imageProfile).into(binding.imageProfile);
+
+                        if(imageProfile.equals("")){
+                            binding.imageProfile.setImageResource(R.drawable.profile_placeholder);
+                        }else{
+                            Glide.with(SettingsActivity.this).load(imageProfile).into(binding.imageProfile);
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

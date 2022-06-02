@@ -42,8 +42,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         holder.tvDesc.setText(chatList.getDescription());
         holder.tvDate.setText(chatList.getDate());
 
-        Glide.with(context).load(chatList.getUrlProfile()).into(holder.profile);
-
+        if(chatList.getUrlProfile().equals("")){
+            holder.profile.setImageResource(R.drawable.profile_placeholder);
+        }else{
+            Glide.with(context).load(chatList.getUrlProfile()).into(holder.profile);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

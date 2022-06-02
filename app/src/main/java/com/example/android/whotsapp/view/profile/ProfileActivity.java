@@ -227,7 +227,13 @@ public class ProfileActivity extends AppCompatActivity {
 
                     binding.tvUsername.setText(userName);
                     binding.tvPhone.setText(number);
-                    Glide.with(ProfileActivity.this).load(imageProfile).into(binding.imageProfile);
+
+                    assert imageProfile != null;
+                    if(imageProfile.equals("")){
+                        binding.imageProfile.setImageResource(R.drawable.profile_placeholder);
+                    }else{
+                        Glide.with(ProfileActivity.this).load(imageProfile).into(binding.imageProfile);
+                    }
 
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

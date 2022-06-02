@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.databinding.ActivityViewImageBinding;
-import com.google.android.gms.common.util.DataUtils;
 
 public class ViewImageActivity extends AppCompatActivity {
 
