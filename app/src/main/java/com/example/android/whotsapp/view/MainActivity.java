@@ -14,17 +14,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.android.whotsapp.R;
-import com.example.android.whotsapp.adapter.ContactsAdapter;
 import com.example.android.whotsapp.databinding.ActivityMainBinding;
 import com.example.android.whotsapp.menu.CallsFragment;
 import com.example.android.whotsapp.menu.ChatsFragment;
 import com.example.android.whotsapp.menu.StatusFragment;
-import com.example.android.whotsapp.view.contact.ContactsActivity;
-import com.example.android.whotsapp.view.settings.SettingsActivity;
+import com.example.android.whotsapp.view.activities.contact.ContactsActivity;
+import com.example.android.whotsapp.view.activities.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

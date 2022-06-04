@@ -2,7 +2,6 @@ package com.example.android.whotsapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.users.User;
-import com.example.android.whotsapp.view.chats.ChatsActivity;
-import com.example.android.whotsapp.view.contact.ContactsActivity;
-
-import org.w3c.dom.Text;
+import com.example.android.whotsapp.view.activities.chats.ChatsActivity;
 
 import java.util.List;
 

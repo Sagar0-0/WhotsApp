@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.chats;
+package com.example.android.whotsapp.view.activities.chats;
 
 import static android.content.ContentValues.TAG;
 
@@ -22,6 +22,7 @@ import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ChatsAdapter;
 import com.example.android.whotsapp.databinding.ActivityChatsBinding;
 import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.view.activities.profile.UserProfileActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +47,7 @@ public class ChatsActivity extends AppCompatActivity {
     private String receiverId;
     private ChatsAdapter adapter;
     private List<Chats> list;
+    private String userProfile,userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +58,9 @@ public class ChatsActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference();
 
         Intent intent = getIntent();
-        String userName = intent.getStringExtra("userName");
+        userName = intent.getStringExtra("userName");
         receiverId = intent.getStringExtra("userId");
-        String userProfile = intent.getStringExtra("userProfile");
+        userProfile = intent.getStringExtra("userProfile");
 
         if (receiverId != null) {
             binding.tvUsername.setText(userName);
@@ -149,6 +151,16 @@ public class ChatsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        binding.imageProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChatsActivity.this, UserProfileActivity.class)
+                .putExtra("userId",receiverId)
+                .putExtra("userProfile",userProfile)
+                .putExtra("userName",userName));
             }
         });
     }

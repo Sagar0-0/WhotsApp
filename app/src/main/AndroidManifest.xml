@@ -15,31 +15,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhotsApp">
         <activity
-            android:name=".view.chats.ChatsActivity"
+            android:name=".view.activities.profile.UserProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".view.contact.ContactsActivity"
+            android:name=".view.activities.chats.ChatsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.display.ViewImageActivity"
+            android:name=".view.activities.contact.ContactsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.profile.ProfileActivity"
+            android:name=".view.activities.display.ViewImageActivity"
             android:exported="false" />
         <activity
-            android:name=".view.settings.SettingsActivity"
+            android:name=".view.activities.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".view.auth.SetUserInfoActivity"
+            android:name=".view.activities.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.auth.PhoneLoginActivity"
+            android:name=".view.activities.auth.SetUserInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".view.startup.WelcomeScreenActivity"
+            android:name=".view.activities.auth.PhoneLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.startup.SplashScreen"
+            android:name=".view.activities.startup.WelcomeScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.startup.SplashScreen"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>

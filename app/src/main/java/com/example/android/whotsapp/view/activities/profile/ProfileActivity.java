@@ -1,9 +1,8 @@
-package com.example.android.whotsapp.view.profile;
+package com.example.android.whotsapp.view.activities.profile;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
@@ -22,15 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.app.NavUtils;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.databinding.ActivityProfileBinding;
-import com.example.android.whotsapp.view.display.ViewImageActivity;
-import com.example.android.whotsapp.view.startup.SplashScreen;
+import com.example.android.whotsapp.view.activities.display.ViewImageActivity;
+import com.example.android.whotsapp.view.activities.startup.SplashScreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.startup.SplashScreen">
+    tools:context=".view.activities.startup.SplashScreen">
 
     <ImageView
         android:id="@+id/splash_background"

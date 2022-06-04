@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.display;
+package com.example.android.whotsapp.view.activities.display;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

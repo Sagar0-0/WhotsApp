@@ -1,15 +1,12 @@
-package com.example.android.whotsapp.view.startup;
+package com.example.android.whotsapp.view.activities.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivitySplashScreenBinding;
 import com.example.android.whotsapp.view.MainActivity;

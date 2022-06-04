@@ -1,13 +1,10 @@
-package com.example.android.whotsapp.view.contact;
-
-import static android.content.ContentValues.TAG;
+package com.example.android.whotsapp.view.activities.contact;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ContactsAdapter;
@@ -19,7 +16,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;

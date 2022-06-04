@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.auth;
+package com.example.android.whotsapp.view.activities.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
