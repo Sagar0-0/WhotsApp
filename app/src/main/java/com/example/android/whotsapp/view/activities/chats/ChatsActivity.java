@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,48 +18,41 @@ import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ChatsAdapter;
 import com.example.android.whotsapp.databinding.ActivityChatsBinding;
+import com.example.android.whotsapp.interfaces.OnReadChatCallBack;
+import com.example.android.whotsapp.managers.ChatService;
 import com.example.android.whotsapp.model.chat.Chats;
 import com.example.android.whotsapp.view.activities.profile.UserProfileActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ChatsActivity extends AppCompatActivity {
 
     public static final String TAG = "ChatsActivity";
     private ActivityChatsBinding binding;
-    private FirebaseUser firebaseUser;
-    private DatabaseReference reference;
     private String receiverId;
     private ChatsAdapter adapter;
-    private List<Chats> list;
+    private List<Chats> list=new ArrayList<>();
     private String userProfile, userName;
     private boolean actionsShown = false;
+    private ChatService chatService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chats);
+        initialise();
+        initBtnClick();
+        readChat();
+    }
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference();
-
+    private void initialise() {
         Intent intent = getIntent();
         userName = intent.getStringExtra("userName");
         receiverId = intent.getStringExtra("userId");
         userProfile = intent.getStringExtra("userProfile");
+
+        chatService=new ChatService(this,receiverId);
 
         if (receiverId != null) {
             binding.tvUsername.setText(userName);
@@ -93,48 +85,26 @@ public class ChatsActivity extends AppCompatActivity {
             }
         });
 
-        initBtnClick();
-
-        list = new ArrayList<>();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         linearLayoutManager.setStackFromEnd(true);
         binding.recyclerview.setLayoutManager(linearLayoutManager);
-        readChat();
+        adapter=new ChatsAdapter(list,this);
+        binding.recyclerview.setAdapter(adapter);
 
     }
 
     private void readChat() {
-        try {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-            reference.child("Chats").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                    list.clear();
-                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                        Chats chats = snapshot.getValue(Chats.class);
-                        assert chats != null;
-                        if (chats.getSender().equals(firebaseUser.getUid()) && chats.getReceiver().equals(receiverId)
-                                || chats.getSender().equals(receiverId) && chats.getReceiver().equals(firebaseUser.getUid())) {
-                            list.add(chats);
-                        }
-                    }
-                    if (adapter != null) {
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        adapter = new ChatsAdapter(list, ChatsActivity.this);
-                        binding.recyclerview.setAdapter(adapter);
-                    }
-                }
+        chatService.readChatData(new OnReadChatCallBack() {
+            @Override
+            public void OnReadSuccess(List<Chats> list) {
+                adapter.setList(list);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+            @Override
+            public void OnReadFailed() {
+                Log.d(TAG, "OnReadFailed: ");
+            }
+        });
     }
 
     private void initBtnClick() {
@@ -142,7 +112,7 @@ public class ChatsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(binding.edMessage.getText().toString())) {
-                    sendTextMessage(binding.edMessage.getText().toString());
+                    chatService.sendTextMsg(binding.edMessage.getText().toString());
                     binding.edMessage.setText("");
                 }
             }
@@ -153,6 +123,7 @@ public class ChatsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         binding.imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,49 +136,15 @@ public class ChatsActivity extends AppCompatActivity {
         binding.btnFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(actionsShown){
-                    actionsShown=false;
+                if (actionsShown) {
+                    actionsShown = false;
                     binding.layoutActions.setVisibility(View.GONE);
-                }else{
-                    actionsShown=true;
+                } else {
+                    actionsShown = true;
                     binding.layoutActions.setVisibility(View.VISIBLE);
                 }
             }
         });
     }
 
-    private void sendTextMessage(String text) {
-        Date date = Calendar.getInstance().getTime();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String today = formatter.format(date);
-        Calendar currentDateTime = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
-        String currentTime = df.format(currentDateTime.getTime());
-
-        Chats chats = new Chats(
-                today + ", " + currentTime,
-                text,
-                "TEXT",
-                firebaseUser.getUid(),
-                receiverId
-        );
-
-        reference.child("Chats").push().setValue(chats).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d(TAG, "onSuccess: ");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "onFailure: ");
-            }
-        });
-
-        DatabaseReference chatRef1 = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid()).child(receiverId);
-        chatRef1.child("chatid").setValue(receiverId);
-
-        DatabaseReference chatRef2 = FirebaseDatabase.getInstance().getReference("ChatList").child(receiverId).child(firebaseUser.getUid());
-        chatRef2.child("chatid").setValue(firebaseUser.getUid());
-    }
 }
