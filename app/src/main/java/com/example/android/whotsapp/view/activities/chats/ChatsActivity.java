@@ -1,7 +1,5 @@
 package com.example.android.whotsapp.view.activities.chats;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,13 +39,15 @@ import java.util.List;
 
 public class ChatsActivity extends AppCompatActivity {
 
+    public static final String TAG = "ChatsActivity";
     private ActivityChatsBinding binding;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private String receiverId;
     private ChatsAdapter adapter;
     private List<Chats> list;
-    private String userProfile,userName;
+    private String userProfile, userName;
+    private boolean actionsShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +64,9 @@ public class ChatsActivity extends AppCompatActivity {
 
         if (receiverId != null) {
             binding.tvUsername.setText(userName);
-            if(userProfile==null || userProfile.equals("")){
+            if (userProfile == null || userProfile.equals("")) {
                 binding.imageProfile.setImageResource(R.drawable.profile_placeholder);
-            }else{
+            } else {
                 Glide.with(this).load(userProfile).into(binding.imageProfile);
             }
         }
@@ -113,8 +113,8 @@ public class ChatsActivity extends AppCompatActivity {
                     for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         Chats chats = snapshot.getValue(Chats.class);
                         assert chats != null;
-                        if(chats.getSender().equals(firebaseUser.getUid()) && chats.getReceiver().equals(receiverId)
-                        || chats.getSender().equals(receiverId) && chats.getReceiver().equals(firebaseUser.getUid())) {
+                        if (chats.getSender().equals(firebaseUser.getUid()) && chats.getReceiver().equals(receiverId)
+                                || chats.getSender().equals(receiverId) && chats.getReceiver().equals(firebaseUser.getUid())) {
                             list.add(chats);
                         }
                     }
@@ -153,14 +153,25 @@ public class ChatsActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         binding.imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChatsActivity.this, UserProfileActivity.class)
-                .putExtra("userId",receiverId)
-                .putExtra("userProfile",userProfile)
-                .putExtra("userName",userName));
+                        .putExtra("userId", receiverId)
+                        .putExtra("userProfile", userProfile)
+                        .putExtra("userName", userName));
+            }
+        });
+        binding.btnFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(actionsShown){
+                    actionsShown=false;
+                    binding.layoutActions.setVisibility(View.GONE);
+                }else{
+                    actionsShown=true;
+                    binding.layoutActions.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

@@ -50,4 +50,8 @@
     <string name="type_message_here">Message</string>
     <string name="mute_notifications">Mute notifications</string>
     <string name="about_and_phone_number">About and phone number</string>
+    <string name="document">Document</string>
+    <string name="audio">Audio</string>
+    <string name="location">Location</string>
+    <string name="contacts">Contacts</string>
 </resources>
