@@ -17,8 +17,8 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapse"
                 android:layout_width="match_parent"
-                android:id="@+id/collaps"
                 android:layout_height="250dp"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?attr/colorSecondary"
@@ -42,8 +42,8 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:background="@android:color/transparent"
                     android:layout_height="?actionBarSize"
+                    android:background="@android:color/transparent"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:subtitleTextColor="@color/white"
