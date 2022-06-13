@@ -1,14 +1,19 @@
 package com.example.android.whotsapp.view.activities.chats;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +26,8 @@ import com.example.android.whotsapp.databinding.ActivityChatsBinding;
 import com.example.android.whotsapp.interfaces.OnReadChatCallBack;
 import com.example.android.whotsapp.managers.ChatService;
 import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.service.FirebaseService;
+import com.example.android.whotsapp.view.activities.dailog.DialogReviewSendImage;
 import com.example.android.whotsapp.view.activities.profile.UserProfileActivity;
 
 import java.util.ArrayList;
@@ -29,13 +36,15 @@ import java.util.List;
 public class ChatsActivity extends AppCompatActivity {
 
     public static final String TAG = "ChatsActivity";
+    private final int IMAGE_GALLERY_REQUEST = 111;
     private ActivityChatsBinding binding;
     private String receiverId;
     private ChatsAdapter adapter;
-    private List<Chats> list=new ArrayList<>();
+    private List<Chats> list = new ArrayList<>();
     private String userProfile, userName;
     private boolean actionsShown = false;
     private ChatService chatService;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +61,7 @@ public class ChatsActivity extends AppCompatActivity {
         receiverId = intent.getStringExtra("userId");
         userProfile = intent.getStringExtra("userProfile");
 
-        chatService=new ChatService(this,receiverId);
+        chatService = new ChatService(this, receiverId);
 
         if (receiverId != null) {
             binding.tvUsername.setText(userName);
@@ -88,7 +97,7 @@ public class ChatsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         linearLayoutManager.setStackFromEnd(true);
         binding.recyclerview.setLayoutManager(linearLayoutManager);
-        adapter=new ChatsAdapter(list,this);
+        adapter = new ChatsAdapter(list, this);
         binding.recyclerview.setAdapter(adapter);
 
     }
@@ -142,6 +151,62 @@ public class ChatsActivity extends AppCompatActivity {
                 } else {
                     actionsShown = true;
                     binding.layoutActions.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        binding.btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "select image"), IMAGE_GALLERY_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IMAGE_GALLERY_REQUEST
+                && resultCode == RESULT_OK
+                && data != null
+                && data.getData() != null) {
+            imageUri = data.getData();
+//            uploadToFirebase();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                reviewImage(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void reviewImage(Bitmap bitmap) {
+        new DialogReviewSendImage(ChatsActivity.this, bitmap).show(new DialogReviewSendImage.OnCallBack() {
+            @Override
+            public void OnButtonSendClick() {
+                if (imageUri != null) {
+                    final ProgressDialog progressDialog = new ProgressDialog(ChatsActivity.this);
+                    progressDialog.setMessage("Sending..");
+                    new FirebaseService(ChatsActivity.this).uploadImageToFireBaseStorage(imageUri, new FirebaseService.OnCallBack() {
+                        @Override
+                        public void onUploadSuccess(String imageUri) {
+                            chatService.sendImage(imageUri);
+                            progressDialog.dismiss();
+                        }
+
+                        @Override
+                        public void OnUploadFailed(Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
             }
         });
