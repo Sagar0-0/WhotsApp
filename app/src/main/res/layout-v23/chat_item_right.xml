@@ -2,18 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
     android:gravity="end"
-    android:layout_marginBottom="5dp"
-    android:layout_marginEnd="5dp"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_text_message"
+    <LinearLayout
+        android:id="@+id/layout_text"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_text_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_text_chat_right"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:text="This is a text message"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_image"
+        android:layout_width="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:layout_marginEnd="10dp"
+        app:cardElevation="5dp"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/image_chat"
+        android:adjustViewBounds="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_text_chat_right"
-        android:padding="10dp"
-        android:text="This is a text message" />
+        android:minWidth="280dp"
+        android:maxWidth="330dp"
+        android:maxHeight="400dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/profile_placeholder"/>
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>

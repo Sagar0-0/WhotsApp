@@ -195,6 +195,10 @@ public class ChatsActivity extends AppCompatActivity {
                 if (imageUri != null) {
                     final ProgressDialog progressDialog = new ProgressDialog(ChatsActivity.this);
                     progressDialog.setMessage("Sending..");
+                    progressDialog.show();
+                    binding.layoutActions.setVisibility(View.GONE);
+                    actionsShown=false;
+
                     new FirebaseService(ChatsActivity.this).uploadImageToFireBaseStorage(imageUri, new FirebaseService.OnCallBack() {
                         @Override
                         public void onUploadSuccess(String imageUri) {
