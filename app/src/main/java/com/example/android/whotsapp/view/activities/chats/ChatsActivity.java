@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.devlomi.record_view.OnBasketAnimationEnd;
+import com.devlomi.record_view.OnRecordListener;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ChatsAdapter;
 import com.example.android.whotsapp.databinding.ActivityChatsBinding;
@@ -82,9 +84,11 @@ public class ChatsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (TextUtils.isEmpty(binding.edMessage.getText().toString())) {
-                    binding.btnSend.setImageDrawable(getDrawable(R.drawable.ic_baseline_keyboard_voice_24));
+                    binding.btnSend.setVisibility(View.INVISIBLE);
+                    binding.recordButton.setVisibility(View.VISIBLE);
                 } else {
-                    binding.btnSend.setImageDrawable(getDrawable(R.drawable.ic_baseline_send_24));
+                    binding.btnSend.setVisibility(View.VISIBLE);
+                    binding.recordButton.setVisibility(View.GONE);
                 }
             }
 
@@ -100,6 +104,47 @@ public class ChatsActivity extends AppCompatActivity {
         adapter = new ChatsAdapter(list, this);
         binding.recyclerview.setAdapter(adapter);
 
+        binding.recordButton.setRecordView(binding.recordView);
+        binding.recordView.setOnRecordListener(new OnRecordListener() {
+            @Override
+            public void onStart() {
+                binding.btnEmoji.setVisibility(View.INVISIBLE);
+                binding.btnFile.setVisibility(View.INVISIBLE);
+                binding.btnCamera.setVisibility(View.INVISIBLE);
+                binding.edMessage.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancel() {
+                binding.btnFile.setVisibility(View.VISIBLE);
+                binding.btnCamera.setVisibility(View.VISIBLE);
+                binding.edMessage.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFinish(long recordTime, boolean limitReached) {
+                binding.btnEmoji.setVisibility(View.VISIBLE);
+                binding.btnFile.setVisibility(View.VISIBLE);
+                binding.btnCamera.setVisibility(View.VISIBLE);
+                binding.edMessage.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onLessThanSecond() {
+
+                binding.btnEmoji.setVisibility(View.VISIBLE);
+                binding.btnFile.setVisibility(View.VISIBLE);
+                binding.btnCamera.setVisibility(View.VISIBLE);
+                binding.edMessage.setVisibility(View.VISIBLE);
+            }
+        });
+        binding.recordView.setOnBasketAnimationEndListener(new OnBasketAnimationEnd() {
+            @Override
+            public void onAnimationEnd() {
+                binding.btnEmoji.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void readChat() {
@@ -117,13 +162,10 @@ public class ChatsActivity extends AppCompatActivity {
     }
 
     private void initBtnClick() {
-        binding.btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(binding.edMessage.getText().toString())) {
-                    chatService.sendTextMsg(binding.edMessage.getText().toString());
-                    binding.edMessage.setText("");
-                }
+        binding.btnSend.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(binding.edMessage.getText().toString())) {
+                chatService.sendTextMsg(binding.edMessage.getText().toString());
+                binding.edMessage.setText("");
             }
         });
         binding.btnBack.setOnClickListener(new View.OnClickListener() {

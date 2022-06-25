@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -60,7 +61,8 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textMessage;
-        private LinearLayout layoutText,layoutImage;
+        private LinearLayout layoutText;
+        private CardView layoutImage;
         private ImageView imageMessage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
