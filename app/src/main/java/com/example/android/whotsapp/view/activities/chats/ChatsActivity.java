@@ -131,7 +131,7 @@ public class ChatsActivity extends AppCompatActivity {
                 if (checkAudioPermission()) {
                     startRecord();
                     Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(100);
+                    vibrator.vibrate(70);
                 } else {
                     requestPermission();
                 }
@@ -189,7 +189,6 @@ public class ChatsActivity extends AppCompatActivity {
                 mediaRecorder.reset();
                 mediaRecorder.release();
                 mediaRecorder = null;
-
             }
         } catch (Exception e) {
             e.printStackTrace();

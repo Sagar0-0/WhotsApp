@@ -129,17 +129,17 @@ public class ChatService {
         return today + ", " + currentTime;
     }
 
-    public void sendVoice(String audioPath){
-        final Uri uriAudio=Uri.fromFile(new File(audioPath));
-        final StorageReference audioRef= FirebaseStorage.getInstance().getReference().child("Chats/Voice/");
+    public void sendVoice(String audioPath) {
+        final Uri uriAudio = Uri.fromFile(new File(audioPath));
+        final StorageReference audioRef = FirebaseStorage.getInstance().getReference().child("Chats/Voice/" + System.currentTimeMillis());
         audioRef.putFile(uriAudio).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri>urlTask=taskSnapshot.getStorage().getDownloadUrl();
-                while(!urlTask.isSuccessful());
-                Uri downloadUrl=urlTask.getResult();
-                String voiceUrl=String.valueOf(downloadUrl);
-                Chats chats=new Chats(
+                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!urlTask.isSuccessful()) ;
+                Uri downloadUrl = urlTask.getResult();
+                String voiceUrl = String.valueOf(downloadUrl);
+                Chats chats = new Chats(
                         getCurrentDate(),
                         "",
                         voiceUrl,
