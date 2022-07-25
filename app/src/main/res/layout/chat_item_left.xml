@@ -77,11 +77,13 @@
             android:id="@+id/v_length"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_marginEnd="20dp"
             android:layout_height="1dp"
             android:layout_gravity="center_vertical"
             android:background="@color/white"/>
         <Chronometer
             android:id="@+id/tv_duration"
+            android:visibility="gone"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"

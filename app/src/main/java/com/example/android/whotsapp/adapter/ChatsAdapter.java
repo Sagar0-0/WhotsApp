@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.tools.AudioService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,14 +28,17 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
     private List<Chats> list;
     private FirebaseUser firebaseUser;
     private Context context;
+    private ImageButton tmpBtnPlay;
+    private AudioService audioService;
 
     public ChatsAdapter(List<Chats> list, Context context) {
         this.list = list;
         this.context = context;
+        this.audioService=new AudioService(context);
     }
 
-    public void setList(List<Chats> list){
-        this.list=list;
+    public void setList(List<Chats> list) {
+        this.list = list;
         notifyDataSetChanged();
     }
 
@@ -43,8 +48,8 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         if (viewType == MSG_TYPE_LEFT) {
             View view = LayoutInflater.from(context).inflate(R.layout.chat_item_left, parent, false);
             return new ViewHolder(view);
-        }else{
-            View view= LayoutInflater.from(context).inflate(R.layout.chat_item_right,parent,false);
+        } else {
+            View view = LayoutInflater.from(context).inflate(R.layout.chat_item_right, parent, false);
             return new ViewHolder(view);
         }
     }
@@ -59,21 +64,36 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         return list.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (list.get(position).getSender().equals(firebaseUser.getUid())) {
+            return MSG_TYPE_RIGHT;
+        } else {
+            return MSG_TYPE_LEFT;
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textMessage;
-        private LinearLayout layoutText,layoutVoice;
+        private LinearLayout layoutText, layoutVoice;
         private CardView layoutImage;
         private ImageView imageMessage;
+        private ImageButton btnPlay;
+        private ViewHolder tempHolder;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            layoutVoice=itemView.findViewById(R.id.layout_voice);
-            textMessage=itemView.findViewById(R.id.tv_text_message);
-            layoutImage=itemView.findViewById(R.id.layout_image);
-            layoutText=itemView.findViewById(R.id.layout_text);
-            imageMessage=itemView.findViewById(R.id.image_chat);
+            layoutVoice = itemView.findViewById(R.id.layout_voice);
+            textMessage = itemView.findViewById(R.id.tv_text_message);
+            layoutImage = itemView.findViewById(R.id.layout_image);
+            layoutText = itemView.findViewById(R.id.layout_text);
+            imageMessage = itemView.findViewById(R.id.image_chat);
+            btnPlay = itemView.findViewById(R.id.btn_play_chat);
         }
-        void bind(Chats chats){
-            switch (chats.getType()){
+
+        void bind(Chats chats) {
+            switch (chats.getType()) {
                 case "TEXT":
                     layoutText.setVisibility(View.VISIBLE);
                     layoutImage.setVisibility(View.GONE);
@@ -90,19 +110,26 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
                     layoutText.setVisibility(View.GONE);
                     layoutImage.setVisibility(View.GONE);
                     layoutVoice.setVisibility(View.VISIBLE);
-                    Glide.with(context).load(chats.getUrl()).into(imageMessage);
+
+                    layoutVoice.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(tmpBtnPlay!=null){
+                                tmpBtnPlay.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_play_circle_24));
+                            }
+
+                            btnPlay.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_pause_circle_24));
+                            audioService.playAudioFromUrl(chats.getUrl(), new AudioService.OnPlayCallback() {
+                                @Override
+                                public void OnFinished() {
+                                    btnPlay.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_play_circle_24));
+                                }
+                            });
+                            tmpBtnPlay=btnPlay;
+                        }
+                    });
                     break;
             }
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        if(list.get(position).getSender().equals(firebaseUser.getUid())){
-            return MSG_TYPE_RIGHT;
-        }else{
-            return MSG_TYPE_LEFT;
         }
     }
 }
