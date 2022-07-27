@@ -52,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST_CODE = 212;
     private static final int WRITE_EXTERNAL_STORAGE = 123;
+    private static final int IMAGE_INTENT_CODE = 443;
     private final int IMAGE_GALLERY_REQUEST = 111;
     private ActivityProfileBinding binding;
     private FirebaseUser firebaseUser;
@@ -185,7 +186,7 @@ public class ProfileActivity extends AppCompatActivity {
             imageUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             intent.putExtra("listPhotoName", imageFileName);
-            startActivityForResult(intent, 440);
+            startActivityForResult(intent, IMAGE_INTENT_CODE);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -207,11 +208,8 @@ public class ProfileActivity extends AppCompatActivity {
                 && data.getData() != null) {
             imageUri = data.getData();
             uploadToFirebase();
-        }else if (requestCode == 440
-                && resultCode == RESULT_OK
-                && data != null
-                && data.getData() != null) {
-            imageUri = data.getData();
+        }else if (requestCode == IMAGE_INTENT_CODE
+                && resultCode == RESULT_OK) {
             uploadToFirebase();
         }
     }

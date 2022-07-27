@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "712936450861",
+    "project_id": "whotsapp-43e7d",
+    "storage_bucket": "whotsapp-43e7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712936450861:android:ed5627d89c5492b0f881a4",
+        "android_client_info": {
+          "package_name": "com.example.android.whotsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712936450861-od8qd6v7ok5ocv5i33k25jvp86km9d0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDopx2b5RjsE-Hk-CYUyXyYSMGol8jyHss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712936450861-od8qd6v7ok5ocv5i33k25jvp86km9d0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
