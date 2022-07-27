@@ -1,12 +1,16 @@
 package com.example.android.whotsapp.view.activities.profile;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +21,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.example.android.whotsapp.BuildConfig;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.databinding.ActivityProfileBinding;
@@ -33,15 +41,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST_CODE = 212;
+    private static final int WRITE_EXTERNAL_STORAGE = 123;
     private final int IMAGE_GALLERY_REQUEST = 111;
     private ActivityProfileBinding binding;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
-    private BottomSheetDialog bsPickPhoto,bsEditName;
+    private BottomSheetDialog bsPickPhoto, bsEditName;
     private Uri imageUri;
     private ProgressDialog progressDialog;
 
@@ -67,11 +82,11 @@ public class ProfileActivity extends AppCompatActivity {
         binding.llEditName.setOnClickListener(v -> showBottomSheetEditName());
         binding.imageProfile.setOnClickListener(v -> {
             binding.imageProfile.invalidate();
-            Drawable dr=binding.imageProfile.getDrawable();
-            Common.IMAGE_BITMAP=((BitmapDrawable)dr.getCurrent()).getBitmap();
-            ActivityOptionsCompat activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(ProfileActivity.this,binding.imageProfile,"image");
-            Intent intent=new Intent(ProfileActivity.this, ViewImageActivity.class);
-            startActivity(intent,activityOptionsCompat.toBundle());
+            Drawable dr = binding.imageProfile.getDrawable();
+            Common.IMAGE_BITMAP = ((BitmapDrawable) dr.getCurrent()).getBitmap();
+            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(ProfileActivity.this, binding.imageProfile, "image");
+            Intent intent = new Intent(ProfileActivity.this, ViewImageActivity.class);
+            startActivity(intent, activityOptionsCompat.toBundle());
         });
         binding.btnLogOut.setOnClickListener(v -> {
             showDialogSignOut();
@@ -79,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void showDialogSignOut() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("DO you want to Sign out?");
         builder.setPositiveButton("Sign Out", (dialog, which) -> {
             dialog.cancel();
@@ -88,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-        AlertDialog alertDialog=builder.create();
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
@@ -98,11 +113,11 @@ public class ProfileActivity extends AppCompatActivity {
         view.findViewById(R.id.btn_cancel).setOnClickListener(v -> {
             bsEditName.dismiss();
         });
-        final EditText editText=view.findViewById(R.id.ed_username);
+        final EditText editText = view.findViewById(R.id.ed_username);
         view.findViewById(R.id.btn_save).setOnClickListener(v -> {
-            if(TextUtils.isEmpty(editText.getText().toString())){
+            if (TextUtils.isEmpty(editText.getText().toString())) {
                 Toast.makeText(this, "Name can't be empty", Toast.LENGTH_SHORT).show();
-            }else{
+            } else {
                 upadteName(editText.getText().toString());
                 bsEditName.dismiss();
             }
@@ -117,7 +132,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void upadteName(String newName) {
-        firestore.collection("Users").document(firebaseUser.getUid()).update("userName",newName)
+        firestore.collection("Users").document(firebaseUser.getUid()).update("userName", newName)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -135,7 +150,7 @@ public class ProfileActivity extends AppCompatActivity {
             bsPickPhoto.dismiss();
         });
         view.findViewById(R.id.ll_camera).setOnClickListener(v -> {
-            Toast.makeText(this, "Can't you wait for it?", Toast.LENGTH_SHORT).show();
+            checkCameraPermission();
             bsPickPhoto.dismiss();
         });
 
@@ -145,6 +160,35 @@ public class ProfileActivity extends AppCompatActivity {
         bsPickPhoto.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         bsPickPhoto.setOnDismissListener(dialog -> bsPickPhoto = null);
         bsPickPhoto.show();
+    }
+
+    private void checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_REQUEST_CODE);
+        } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    WRITE_EXTERNAL_STORAGE);
+        } else {
+            openCamera();
+        }
+    }
+
+    private void openCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + ".jpg";
+        try {
+            File file = File.createTempFile("IMG_" + timeStamp, ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+            imageUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            intent.putExtra("listPhotoName", imageFileName);
+            startActivityForResult(intent, 440);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void openGallery() {
@@ -158,6 +202,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == IMAGE_GALLERY_REQUEST
+                && resultCode == RESULT_OK
+                && data != null
+                && data.getData() != null) {
+            imageUri = data.getData();
+            uploadToFirebase();
+        }else if (requestCode == 440
                 && resultCode == RESULT_OK
                 && data != null
                 && data.getData() != null) {
@@ -185,9 +235,9 @@ public class ProfileActivity extends AppCompatActivity {
                     binding.tvPhone.setText(number);
 
                     assert imageProfile != null;
-                    if(imageProfile.equals("")){
+                    if (imageProfile.equals("")) {
                         binding.imageProfile.setImageResource(R.drawable.profile_placeholder);
-                    }else{
+                    } else {
                         Glide.with(ProfileActivity.this).load(imageProfile).into(binding.imageProfile);
                     }
 
