@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.ChatList;
 import com.example.android.whotsapp.view.activities.chats.ChatsActivity;
+import com.example.android.whotsapp.view.activities.dailog.DialogViewUser;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
@@ -54,6 +55,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
                         .putExtra("userId",chatList.getUserId())
                         .putExtra("userName",chatList.getUserName())
                         .putExtra("userProfile",chatList.getUrlProfile()));
+            }
+        });
+        holder.profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DialogViewUser(context,chatList);
             }
         });
     }
