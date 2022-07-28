@@ -1,14 +1,15 @@
 package com.example.android.whotsapp.view.activities.auth;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivityPhoneLoginBinding;
@@ -49,7 +50,7 @@ public class PhoneLoginActivity extends AppCompatActivity{
         //button call
         progressDialog=new ProgressDialog(this);
         binding.btnNext.setOnClickListener(v -> {
-            if(binding.btnNext.getText().toString().equals("Next")){
+            if(binding.btnNext.getText().toString().equals("Send")){
                 progressDialog.show();
                 String phone ="+"+binding.edCodeCountry.getText().toString()+ binding.edPhone.getText().toString();
                 startPhoneVerification(phone);
@@ -88,7 +89,10 @@ public class PhoneLoginActivity extends AppCompatActivity{
                 mResendToken = token;
 
                 Toast.makeText(PhoneLoginActivity.this, "Code sent!", Toast.LENGTH_LONG).show();
-                binding.btnNext.setText("Continue");
+                binding.btnNext.setText("Confirm");
+                binding.edCode.setVisibility(View.VISIBLE);
+                binding.edCodeCountry.setEnabled(false);
+                binding.edPhone.setEnabled(false);
                 progressDialog.dismiss();
             }
         };

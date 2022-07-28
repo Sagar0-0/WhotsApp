@@ -3,6 +3,7 @@ package com.example.android.whotsapp.view.activities.profile;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,15 +38,19 @@ import com.example.android.whotsapp.view.activities.display.ViewImageActivity;
 import com.example.android.whotsapp.view.activities.startup.SplashScreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -214,12 +220,37 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
     private void uploadToFirebase() {
         if (imageUri != null) {
             progressDialog.setMessage("Uploading...");
             progressDialog.show();
 
+            StorageReference riversRef = FirebaseStorage.getInstance().getReference().child("ImagesProfile/" + System.currentTimeMillis() + "." + getFileExtension(imageUri));
+            riversRef.putFile(imageUri).addOnSuccessListener((taskSnapshot) -> {
+
+                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!urlTask.isSuccessful()) ;
+                Uri downloadUrl = urlTask.getResult();
+                final String sdownload_url = String.valueOf(downloadUrl);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("imageProfile", sdownload_url);
+                progressDialog.dismiss();
+                firestore.collection("Users").
+                        document(firebaseUser.getUid()).update(hashMap)
+                        .addOnSuccessListener((aVoid) -> {
+                            Toast.makeText(getApplicationContext(), "upload successfully", Toast.LENGTH_SHORT).show();
+                        });
+            }).addOnFailureListener((e) -> {
+                Toast.makeText(getApplicationContext(), "upload Failed", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            });
         }
+
     }
 
     private void getinfo() {
