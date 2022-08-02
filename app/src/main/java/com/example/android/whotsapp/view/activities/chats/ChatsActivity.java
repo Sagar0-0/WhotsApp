@@ -247,7 +247,8 @@ public class ChatsActivity extends AppCompatActivity {
         chatService.readChatData(new OnReadChatCallBack() {
             @Override
             public void OnReadSuccess(List<Chats> list) {
-                adapter.setList(list);
+//                adapter.setList(list);
+                binding.recyclerview.setAdapter(new ChatsAdapter(list,ChatsActivity.this));
             }
 
             @Override

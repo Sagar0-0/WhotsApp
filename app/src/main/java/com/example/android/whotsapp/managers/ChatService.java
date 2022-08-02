@@ -50,10 +50,16 @@ public class ChatService {
                 List<Chats> list = new ArrayList<>();
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     Chats chats = snapshot.getValue(Chats.class);
-                    if (chats != null && chats.getSender().equals(firebaseUser.getUid()) && chats.getReceiver().equals(receiverId)
-                            || chats != null && chats.getSender().equals(receiverId) && chats.getReceiver().equals(firebaseUser.getUid())) {
-                        list.add(chats);
+                    assert chats != null;
+                    try{
+                        if (chats.getSender().equals(firebaseUser.getUid()) && chats.getReceiver().equals(receiverId)
+                                || chats.getSender().equals(receiverId) && chats.getReceiver().equals(firebaseUser.getUid())) {
+                            list.add(chats);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
+
                 }
                 onCallBack.OnReadSuccess(list);
             }
