@@ -1,10 +1,18 @@
 package com.example.android.whotsapp.view.activities.contact;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.os.Bundle;
 
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ContactsAdapter;
@@ -29,6 +37,11 @@ public class ContactsActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
 
+    public static final int REQUEST_READ_CONTACTS=79;
+    private ListView contactList;
+    private ArrayList mobileArray;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +55,80 @@ public class ContactsActivity extends AppCompatActivity {
         firestore=FirebaseFirestore.getInstance();
 
         if (firebaseUser!=null){
-            getContactList();
+            getContactFromPhone();
+//            getContactList();
+        }
+    }
+
+    private void getContactFromPhone() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)== PackageManager.PERMISSION_GRANTED){
+            mobileArray=getAllPhoneContacts();
+        }else{
+            requestPermission();
+        }
+
+    }
+    @SuppressLint("Range")
+    private ArrayList getAllPhoneContacts() {
+        ArrayList<String> phoneList = new ArrayList<>();
+        ContentResolver cr = getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+        if ((cur != null ? cur.getCount() : 0) > 0) {
+            while (cur.moveToNext()) {
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+//                String name = cur.getString(cur.getColumnIndex(
+//                        ContactsContract.Contacts.DISPLAY_NAME));
+//                phoneList.add(name);
+                if (cur.getInt(cur.getColumnIndex( ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        phoneList.add(phoneNo);
+                    }
+                    pCur.close();
+                }
+            }
+        }
+        if (cur != null) {
+            cur.close();
+        }
+        return phoneList;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_READ_CONTACTS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mobileArray = getAllPhoneContacts();
+                } else {
+                    finish();
+                }
+                return;
+            }
+        }
+    }
+
+    private void requestPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_CONTACTS)) {
+            // show UI part if you want here to show some rationale !!!
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS},
+                    REQUEST_READ_CONTACTS);
+        }
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_CONTACTS)) {
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS},
+                    REQUEST_READ_CONTACTS);
         }
     }
 
@@ -55,20 +141,25 @@ public class ContactsActivity extends AppCompatActivity {
                     String userName=snapshot.getString("userName");
                     String imageUrl=snapshot.getString("imageProfile");
                     String desc=snapshot.getString("bio");
+                    String phone=snapshot.getString("userPhone");
 
                     User user=new User();
+                    user.setUserPhone(phone);
                     user.setUserId(userID);
                     user.setBio(desc);
                     user.setUserName(userName);
                     user.setImageProfile(imageUrl);
                     if(userID!=null && !userID.equals(firebaseUser.getUid())) {
-                        list.add(user);
+                        if(mobileArray.contains(user.getUserPhone())){
+                            list.add(user);
+                        }
                     }
                 }
                 adapter=new ContactsAdapter(list,ContactsActivity.this);
                 binding.recyclerView.setAdapter(adapter);
             }
         });
+
     }
     @Override
     public boolean onSupportNavigateUp() {
