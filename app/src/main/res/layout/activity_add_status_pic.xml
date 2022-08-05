@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".view.activities.status.AddStatusPicActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:tint="@android:color/white" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/image_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/profile_placeholder" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_crop_24"
+            app:tint="@android:color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_sticker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_insert_emoticon_24"
+            app:tint="@android:color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_text_fields_24"
+            app:tint="@android:color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:tint="@android:color/white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/profile_placeholder" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:foreground="?selectableItemBackground"
+            android:src="@drawable/ic_baseline_photo_24"
+            app:tint="@android:color/white" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="Add a caption..."
+            android:padding="5dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="35dp"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        android:src="@drawable/ic_baseline_send_24"
+        android:tint="@android:color/white"
+        app:elevation="5dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

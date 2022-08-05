@@ -163,6 +163,7 @@ public class ContactsActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onSupportNavigateUp()    {
         onBackPressed();
