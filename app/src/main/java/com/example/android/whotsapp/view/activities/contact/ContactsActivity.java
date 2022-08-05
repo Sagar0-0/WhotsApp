@@ -32,15 +32,14 @@ import java.util.Objects;
 public class ContactsActivity extends AppCompatActivity {
 
     private ActivityContactsBinding binding;
-    private List<User> list=new ArrayList<>();
+    private final List<User> list=new ArrayList<>();
     private ContactsAdapter adapter;
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
 
     public static final int REQUEST_READ_CONTACTS=79;
     private ListView contactList;
-    private ArrayList mobileArray;
-
+    private ArrayList<String> mobileArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class ContactsActivity extends AppCompatActivity {
 
         if (firebaseUser!=null){
             getContactFromPhone();
-//            getContactList();
+            getContactList();
         }
     }
 
@@ -68,8 +67,9 @@ public class ContactsActivity extends AppCompatActivity {
         }
 
     }
+
     @SuppressLint("Range")
-    private ArrayList getAllPhoneContacts() {
+    private ArrayList<String> getAllPhoneContacts() {
         ArrayList<String> phoneList = new ArrayList<>();
         ContentResolver cr = getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
@@ -121,11 +121,13 @@ public class ContactsActivity extends AppCompatActivity {
     private void requestPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_CONTACTS)) {
             // show UI part if you want here to show some rationale !!!
+            getContactList();
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS},
                     REQUEST_READ_CONTACTS);
         }
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_CONTACTS)) {
+            getContactList();
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS},
                     REQUEST_READ_CONTACTS);
@@ -162,7 +164,7 @@ public class ContactsActivity extends AppCompatActivity {
 
     }
     @Override
-    public boolean onSupportNavigateUp() {
+    public boolean onSupportNavigateUp()    {
         onBackPressed();
         return true;
     }
