@@ -250,7 +250,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == IMAGE_INTENT_CODE
                 && resultCode == RESULT_OK) {
             if(imageUri!=null){
-                startActivity(new Intent(MainActivity.this, AddStatusPicActivity.class));
+                startActivity(new Intent(MainActivity.this, AddStatusPicActivity.class)
+                .putExtra("image",imageUri));
             }
         }
     }

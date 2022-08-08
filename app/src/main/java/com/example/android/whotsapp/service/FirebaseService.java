@@ -5,14 +5,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.android.whotsapp.model.StatusModel;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class FirebaseService {
 
@@ -25,22 +22,14 @@ public class FirebaseService {
     public void uploadImageToFireBaseStorage(Uri imageUri, final OnCallBack onCallBack) {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ImagesChats/"
                 + System.currentTimeMillis() + "." + getFileExtension(imageUri));
-        storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!urlTask.isSuccessful()) ;
-                Uri downloadUri = urlTask.getResult();
-                final String sdownload_url = String.valueOf(downloadUri);
+        storageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
+            Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+            while (!urlTask.isSuccessful()) ;
+            Uri downloadUri = urlTask.getResult();
+            final String sdownload_url = String.valueOf(downloadUri);
 
-                onCallBack.onUploadSuccess(sdownload_url);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                onCallBack.OnUploadFailed(e);
-            }
-        });
+            onCallBack.onUploadSuccess(sdownload_url);
+        }).addOnFailureListener(onCallBack::OnUploadFailed);
 
     }
 
@@ -54,5 +43,17 @@ public class FirebaseService {
         void onUploadSuccess(String imageUri);
 
         void OnUploadFailed(Exception e);
+    }
+
+    public interface OnAddNewStatusCallBack {
+        void onSuccess();
+        void OnFailed();
+    }
+
+    public void addNewStatus(StatusModel statusModel,OnAddNewStatusCallBack onAddNewStatusCallBack){
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("Status Daily").document(statusModel.getId()).set(statusModel)
+                .addOnSuccessListener(unused -> onAddNewStatusCallBack.onSuccess())
+        .addOnFailureListener(e -> onAddNewStatusCallBack.OnFailed());
     }
 }
