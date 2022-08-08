@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhotsApp">
         <activity
+            android:name=".view.activities.status.DisplayStatusActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.status.AddStatusPicActivity"
             android:exported="false" />
         <activity
