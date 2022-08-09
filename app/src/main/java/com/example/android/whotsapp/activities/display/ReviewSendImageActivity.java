@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.display;
+package com.example.android.whotsapp.activities.display;
 
 import android.os.Bundle;
 

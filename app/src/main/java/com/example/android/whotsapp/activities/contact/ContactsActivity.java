@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.contact;
+package com.example.android.whotsapp.activities.contact;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

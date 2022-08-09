@@ -1,6 +1,6 @@
-package com.example.android.whotsapp.view.activities.auth;
+package com.example.android.whotsapp.activities.auth;
 
-import static com.example.android.whotsapp.view.activities.chats.ChatsActivity.TAG;
+import static com.example.android.whotsapp.activities.chats.ChatsActivity.TAG;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -30,7 +30,7 @@ import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.BuildConfig;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivitySetUserInfoBinding;
-import com.example.android.whotsapp.view.MainActivity;
+import com.example.android.whotsapp.activities.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;

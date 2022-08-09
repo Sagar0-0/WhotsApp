@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.ChatList;
-import com.example.android.whotsapp.view.activities.chats.ChatsActivity;
-import com.example.android.whotsapp.view.activities.dailog.DialogViewUser;
+import com.example.android.whotsapp.activities.chats.ChatsActivity;
+import com.example.android.whotsapp.activities.dailog.DialogViewUser;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;

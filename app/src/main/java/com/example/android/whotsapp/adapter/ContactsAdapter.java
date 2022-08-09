@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.model.users.User;
-import com.example.android.whotsapp.view.activities.chats.ChatsActivity;
+import com.example.android.whotsapp.activities.chats.ChatsActivity;
 
 import java.util.List;
 

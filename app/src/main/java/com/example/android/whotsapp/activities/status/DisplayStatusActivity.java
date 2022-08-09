@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.status;
+package com.example.android.whotsapp.activities.status;
 
 import android.os.Bundle;
 

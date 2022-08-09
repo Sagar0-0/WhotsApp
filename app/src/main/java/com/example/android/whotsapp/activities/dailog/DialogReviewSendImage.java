@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.dailog;
+package com.example.android.whotsapp.activities.dailog;
 
 import android.app.Dialog;
 import android.content.Context;

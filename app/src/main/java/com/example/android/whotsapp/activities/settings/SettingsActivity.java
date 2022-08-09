@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.settings;
+package com.example.android.whotsapp.activities.settings;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivitySettingsBinding;
-import com.example.android.whotsapp.view.activities.profile.ProfileActivity;
+import com.example.android.whotsapp.activities.profile.ProfileActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

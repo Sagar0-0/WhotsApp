@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.profile;
+package com.example.android.whotsapp.activities.profile;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -34,8 +34,8 @@ import com.example.android.whotsapp.BuildConfig;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.databinding.ActivityProfileBinding;
-import com.example.android.whotsapp.view.activities.display.ViewImageActivity;
-import com.example.android.whotsapp.view.activities.startup.SplashScreen;
+import com.example.android.whotsapp.activities.display.ViewImageActivity;
+import com.example.android.whotsapp.activities.startup.SplashScreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

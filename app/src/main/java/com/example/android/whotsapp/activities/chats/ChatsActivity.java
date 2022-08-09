@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.chats;
+package com.example.android.whotsapp.activities.chats;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -38,8 +38,8 @@ import com.example.android.whotsapp.interfaces.OnReadChatCallBack;
 import com.example.android.whotsapp.managers.ChatService;
 import com.example.android.whotsapp.model.chat.Chats;
 import com.example.android.whotsapp.service.FirebaseService;
-import com.example.android.whotsapp.view.activities.dailog.DialogReviewSendImage;
-import com.example.android.whotsapp.view.activities.profile.UserProfileActivity;
+import com.example.android.whotsapp.activities.dailog.DialogReviewSendImage;
+import com.example.android.whotsapp.activities.profile.UserProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;

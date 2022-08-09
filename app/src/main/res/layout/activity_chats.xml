@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:background="#ededed"
         android:orientation="vertical"
-        tools:context=".view.activities.chats.ChatsActivity">
+        tools:context=".activities.chats.ChatsActivity">
 
 
         <androidx.appcompat.widget.Toolbar

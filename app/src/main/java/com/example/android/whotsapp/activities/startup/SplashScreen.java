@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.startup;
+package com.example.android.whotsapp.activities.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.ActivitySplashScreenBinding;
-import com.example.android.whotsapp.view.MainActivity;
+import com.example.android.whotsapp.activities.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

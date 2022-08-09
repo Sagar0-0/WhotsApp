@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.dailog;
+package com.example.android.whotsapp.activities.dailog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,9 +22,9 @@ import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.common.Common;
 import com.example.android.whotsapp.model.ChatList;
-import com.example.android.whotsapp.view.activities.chats.ChatsActivity;
-import com.example.android.whotsapp.view.activities.display.ViewImageActivity;
-import com.example.android.whotsapp.view.activities.profile.UserProfileActivity;
+import com.example.android.whotsapp.activities.chats.ChatsActivity;
+import com.example.android.whotsapp.activities.display.ViewImageActivity;
+import com.example.android.whotsapp.activities.profile.UserProfileActivity;
 
 public class DialogViewUser {
     private Context context;

@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view;
+package com.example.android.whotsapp.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -34,9 +34,9 @@ import com.example.android.whotsapp.menu.CallsFragment;
 import com.example.android.whotsapp.menu.CameraFragment;
 import com.example.android.whotsapp.menu.ChatsFragment;
 import com.example.android.whotsapp.menu.StatusFragment;
-import com.example.android.whotsapp.view.activities.contact.ContactsActivity;
-import com.example.android.whotsapp.view.activities.settings.SettingsActivity;
-import com.example.android.whotsapp.view.activities.status.AddStatusPicActivity;
+import com.example.android.whotsapp.activities.contact.ContactsActivity;
+import com.example.android.whotsapp.activities.settings.SettingsActivity;
+import com.example.android.whotsapp.activities.status.AddStatusPicActivity;
 
 import java.io.File;
 import java.io.IOException;

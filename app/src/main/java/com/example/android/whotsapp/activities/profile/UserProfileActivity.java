@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.profile;
+package com.example.android.whotsapp.activities.profile;
 
 import android.content.Intent;
 import android.os.Bundle;

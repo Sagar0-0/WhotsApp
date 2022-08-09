@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.databinding.FragmentStatusBinding;
-import com.example.android.whotsapp.view.activities.status.DisplayStatusActivity;
+import com.example.android.whotsapp.activities.status.DisplayStatusActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

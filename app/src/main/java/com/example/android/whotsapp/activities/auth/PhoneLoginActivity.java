@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.auth;
+package com.example.android.whotsapp.activities.auth;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

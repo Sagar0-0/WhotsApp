@@ -1,6 +1,6 @@
 package com.example.android.whotsapp.managers;
 
-import static com.example.android.whotsapp.view.activities.chats.ChatsActivity.TAG;
+import static com.example.android.whotsapp.activities.chats.ChatsActivity.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

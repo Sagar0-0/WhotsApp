@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.view.activities.startup;
+package com.example.android.whotsapp.activities.startup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.android.whotsapp.R;
-import com.example.android.whotsapp.view.activities.auth.PhoneLoginActivity;
+import com.example.android.whotsapp.activities.auth.PhoneLoginActivity;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 

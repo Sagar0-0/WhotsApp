@@ -1,6 +1,6 @@
-package com.example.android.whotsapp.view.activities.status;
+package com.example.android.whotsapp.activities.status;
 
-import static com.example.android.whotsapp.view.activities.chats.ChatsActivity.TAG;
+import static com.example.android.whotsapp.activities.chats.ChatsActivity.TAG;
 
 import android.net.Uri;
 import android.os.Bundle;
