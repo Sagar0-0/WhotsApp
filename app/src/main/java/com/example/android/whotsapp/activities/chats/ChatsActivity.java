@@ -36,7 +36,7 @@ import com.example.android.whotsapp.adapter.ChatsAdapter;
 import com.example.android.whotsapp.databinding.ActivityChatsBinding;
 import com.example.android.whotsapp.interfaces.OnReadChatCallBack;
 import com.example.android.whotsapp.managers.ChatService;
-import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.model.Chats;
 import com.example.android.whotsapp.service.FirebaseService;
 import com.example.android.whotsapp.activities.dailog.DialogReviewSendImage;
 import com.example.android.whotsapp.activities.profile.UserProfileActivity;

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
-import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.model.Chats;
 import com.example.android.whotsapp.tools.AudioService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

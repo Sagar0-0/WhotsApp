@@ -1,4 +1,4 @@
-package com.example.android.whotsapp.model.chat;
+package com.example.android.whotsapp.model;
 
 public class Chats {
     private String dateTime;

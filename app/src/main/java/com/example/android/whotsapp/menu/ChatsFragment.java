@@ -19,7 +19,6 @@ import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ChatListAdapter;
 import com.example.android.whotsapp.databinding.FragmentChatsBinding;
 import com.example.android.whotsapp.model.ChatList;
-import com.example.android.whotsapp.model.chat.Chats;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

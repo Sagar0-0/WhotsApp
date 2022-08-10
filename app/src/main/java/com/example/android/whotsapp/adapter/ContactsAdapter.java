@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.whotsapp.R;
-import com.example.android.whotsapp.model.users.User;
+import com.example.android.whotsapp.model.User;
 import com.example.android.whotsapp.activities.chats.ChatsActivity;
 
 import java.util.List;
@@ -38,7 +38,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user=list.get(position);
         holder.username.setText(user.getUserName());
-        holder.desc.setText(user.getBio());
         if(user.getImageProfile().equals("")){
             holder.imageProfile.setImageResource(R.drawable.profile_placeholder);
         }else{

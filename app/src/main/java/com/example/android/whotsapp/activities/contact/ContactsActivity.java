@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.android.whotsapp.R;
 import com.example.android.whotsapp.adapter.ContactsAdapter;
 import com.example.android.whotsapp.databinding.ActivityContactsBinding;
-import com.example.android.whotsapp.model.users.User;
+import com.example.android.whotsapp.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -142,13 +142,11 @@ public class ContactsActivity extends AppCompatActivity {
                     String userID=snapshot.getString("userId");
                     String userName=snapshot.getString("userName");
                     String imageUrl=snapshot.getString("imageProfile");
-                    String desc=snapshot.getString("bio");
                     String phone=snapshot.getString("userPhone");
 
                     User user=new User();
                     user.setUserPhone(phone);
                     user.setUserId(userID);
-                    user.setBio(desc);
                     user.setUserName(userName);
                     user.setImageProfile(imageUrl);
                     if(userID!=null && !userID.equals(firebaseUser.getUid())) {

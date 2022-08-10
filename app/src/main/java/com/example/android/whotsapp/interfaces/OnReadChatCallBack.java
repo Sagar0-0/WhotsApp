@@ -1,6 +1,6 @@
 package com.example.android.whotsapp.interfaces;
 
-import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.model.Chats;
 
 import java.util.List;
 

@@ -10,7 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.android.whotsapp.interfaces.OnReadChatCallBack;
-import com.example.android.whotsapp.model.chat.Chats;
+import com.example.android.whotsapp.model.Chats;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
