@@ -259,20 +259,38 @@ public class ChatsActivity extends AppCompatActivity {
     }
 
     private void initBtnClick() {
+        binding.btnVideoCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChatsActivity.this, "Coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        binding.btnVoiceCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChatsActivity.this, "Coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
+        binding.btnMoreOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChatsActivity.this, "Coming soon..", Toast.LENGTH_SHORT).show();
+            }
+        });
         binding.btnSend.setOnClickListener(v -> {
             if (!TextUtils.isEmpty(binding.edMessage.getText().toString())) {
                 chatService.sendTextMsg(binding.edMessage.getText().toString());
                 binding.edMessage.setText("");
             }
         });
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+        binding.llBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        binding.imageProfile.setOnClickListener(new View.OnClickListener() {
+        binding.llUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChatsActivity.this, UserProfileActivity.class)
@@ -290,6 +308,7 @@ public class ChatsActivity extends AppCompatActivity {
                 } else {
                     actionsShown = true;
                     binding.layoutActions.setVisibility(View.VISIBLE);
+//                    binding.layoutActions.animate().
                 }
             }
         });

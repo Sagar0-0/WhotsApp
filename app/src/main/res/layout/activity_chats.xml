@@ -6,81 +6,104 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ededed"
-        android:orientation="vertical"
         tools:context=".activities.chats.ChatsActivity">
 
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
+            android:id="@+id/ll_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/teal_green">
+            android:layout_alignParentTop="true"
+            android:layout_height="56dp"
+            android:background="@color/teal_green"
+            android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/ll_back_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:foreground="@drawable/btn_ripple_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:src="@drawable/ic_baseline_arrow_back_24"
                     app:tint="@color/white" />
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/image_profile"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/profile_placeholder"
                     app:civ_border_width="0dp" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingStart="15dp">
-
-                    <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Username"
-                        android:textColor="@color/white"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/tv_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="last seen today at 9:00am"
-                        android:textColor="@color/white"
-                        android:textSize="11sp" />
-                </LinearLayout>
-                <!--            <ImageButton-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
-                <!--                android:background="@android:color/transparent"-->
-                <!--                app:tint="@color/white"/>-->
-                <!--            <ImageButton-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
-                <!--                android:background="@android:color/transparent"-->
-                <!--                app:tint="@color/white"/>-->
-                <!--            <ImageButton-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:src="@drawable/ic_baseline_arrow_back_24"-->
-                <!--                android:background="@android:color/transparent"-->
-                <!--                app:tint="@color/white"/>-->
             </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:id="@+id/ll_user_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="last seen today at 9:00am"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_Video_Call"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:padding="6dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_baseline_videocam_24"
+                android:foreground="@drawable/btn_ripple_background"
+                android:contentDescription="@string/video_call" />
+
+            <ImageView
+                android:id="@+id/btn_Voice_Call"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:padding="6dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_baseline_call_24"
+                android:foreground="@drawable/btn_ripple_background"
+                android:contentDescription="@string/voice_call" />
+
+            <ImageView
+                android:id="@+id/btn_more_options"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:padding="6dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_outline_info_24"
+                android:layout_marginEnd="10dp"
+                android:foreground="@drawable/btn_ripple_background"
+                android:contentDescription="@string/more_options" />
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/layout_actions"
@@ -115,6 +138,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+                            android:foreground="@drawable/btn_ripple_background"
                             android:src="@drawable/document"
                             app:civ_border_width="0dp" />
 
@@ -135,6 +159,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+                            android:foreground="@drawable/btn_ripple_background"
                             android:src="@drawable/camera"
                             app:civ_border_width="0dp" />
 
@@ -155,6 +180,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+                            android:foreground="@drawable/btn_ripple_background"
                             android:src="@drawable/gallery"
                             app:civ_border_width="0dp" />
 
@@ -183,6 +209,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+                            android:foreground="@drawable/btn_ripple_background"
                             android:src="@drawable/audio"
                             app:civ_border_width="0dp" />
 
@@ -203,6 +230,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+                            android:foreground="@drawable/btn_ripple_background"
                             android:src="@drawable/location"
                             app:civ_border_width="0dp" />
 
@@ -223,6 +251,7 @@
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:layout_width="60dp"
                             android:layout_height="60dp"
+                            android:foreground="@drawable/btn_ripple_background"
                             android:src="@drawable/contact"
                             app:civ_border_width="0dp" />
 
@@ -241,7 +270,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/ll_action"
-            android:layout_below="@id/toolbar" />
+            android:layout_below="@id/ll_toolbar" />
 
         <LinearLayout
             android:id="@+id/ll_action"
@@ -277,6 +306,7 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
+                        android:background="?android:attr/selectableItemBackground"
                         android:src="@drawable/ic_baseline_emoji_emotions_24"
                         app:tint="#323232" />
 
@@ -297,6 +327,7 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="12dp"
+                        android:foreground="@drawable/btn_ripple_background"
                         android:src="@drawable/ic_baseline_attachment_24"
                         app:tint="#323232" />
 
@@ -305,6 +336,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_gravity="center_vertical"
+                        android:background="?android:attr/selectableItemBackground"
                         android:src="@drawable/ic_baseline_photo_camera_24"
                         app:tint="#323232" />
                 </LinearLayout>
@@ -321,35 +353,34 @@
 
         <com.devlomi.record_view.RecordView
             android:id="@+id/record_view"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:layout_toStartOf="@id/record_button"
+            app:counter_time_color="#ff0000"
             app:slide_to_cancel_arrow="@drawable/recv_ic_arrow"
             app:slide_to_cancel_arrow_color="#111111"
             app:slide_to_cancel_bounds="6dp"
             app:slide_to_cancel_margin_right="15dp"
-            app:slide_to_cancel_text="Slide To Cancel"
-            app:counter_time_color="#ff0000" />
+            app:slide_to_cancel_text="Slide To Cancel" />
 
         <com.devlomi.record_view.RecordButton
             android:id="@+id/record_button"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:layout_margin="7dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="7dp"
             android:layout_marginEnd="5dp"
             android:background="@drawable/recv_bg_mic"
             android:backgroundTint="@color/teal_green"
-            android:scaleType="centerInside"
-            android:visibility="visible"
-            android:tint="@android:color/white"
             android:padding="17dp"
+            android:scaleType="centerInside"
+            android:tint="@android:color/white"
+            android:visibility="visible"
             app:mic_icon="@drawable/recv_ic_mic_white" />
 
     </RelativeLayout>

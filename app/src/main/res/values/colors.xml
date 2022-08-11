@@ -19,4 +19,5 @@
     <color name="light_grey">#595959</color>
     <color name="icon_color">#A8AFB6</color>
     <color name="tab_not_selected">#A9FFFFFF</color>
+    <color name="btn_state_pressed_color">#75FFFFFF</color>
 </resources>
